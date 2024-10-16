@@ -7,6 +7,7 @@
   
   /* Style the images inside the grid */
   .column img {
+    background-image:"https://media.istockphoto.com/id/1449501412/vector/baseball-ball-vector-illustration.jpg?s=612x612&w=0&k=20&c=nYwDttd1C9zB26Ajam9DQRFIbav0CBBTMgiuFwEQvLc=";
     opacity: 0.8;
     cursor: pointer;
   }
@@ -24,13 +25,13 @@
   
   /* The expanding image container (positioning is needed to position the close button and the text) */
   .container {
-    position: relative;
-    display: none;
+    position: fixed;
+    display:flex;
   }
   
   /* Expanding image text */
   #imgtext {
-    position: absolute;
+    position: fixed;
     bottom: 15px;
     left: 15px;
     color: white;
@@ -39,7 +40,7 @@
   
   /* Closable button inside the image */
   .closebtn {
-    position: absolute;
+    position:fixed;
     top: 10px;
     right: 15px;
     color: white;
