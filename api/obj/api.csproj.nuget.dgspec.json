@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/b/Desktop/MIS/TCSexample/api/api.csproj": {}
+    "/Users/b/Desktop/MIS/TCSexample/TCS-/api/api.csproj": {}
   },
   "projects": {
-    "/Users/b/Desktop/MIS/TCSexample/api/api.csproj": {
+    "/Users/b/Desktop/MIS/TCSexample/TCS-/api/api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/b/Desktop/MIS/TCSexample/api/api.csproj",
+        "projectUniqueName": "/Users/b/Desktop/MIS/TCSexample/TCS-/api/api.csproj",
         "projectName": "api",
-        "projectPath": "/Users/b/Desktop/MIS/TCSexample/api/api.csproj",
+        "projectPath": "/Users/b/Desktop/MIS/TCSexample/TCS-/api/api.csproj",
         "packagesPath": "/Users/b/.nuget/packages/",
-        "outputPath": "/Users/b/Desktop/MIS/TCSexample/api/obj/",
+        "outputPath": "/Users/b/Desktop/MIS/TCSexample/TCS-/api/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/b/.nuget/NuGet/NuGet.Config"
