@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jmart\\OneDrive\\Documents\\GitHub\\TCS-\\api\\api.csproj": {}
+    "/Users/b/Desktop/MIS/TCSexample/api/api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jmart\\OneDrive\\Documents\\GitHub\\TCS-\\api\\api.csproj": {
+    "/Users/b/Desktop/MIS/TCSexample/api/api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jmart\\OneDrive\\Documents\\GitHub\\TCS-\\api\\api.csproj",
+        "projectUniqueName": "/Users/b/Desktop/MIS/TCSexample/api/api.csproj",
         "projectName": "api",
-        "projectPath": "C:\\Users\\jmart\\OneDrive\\Documents\\GitHub\\TCS-\\api\\api.csproj",
-        "packagesPath": "C:\\Users\\jmart\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jmart\\OneDrive\\Documents\\GitHub\\TCS-\\api\\obj\\",
+        "projectPath": "/Users/b/Desktop/MIS/TCSexample/api/api.csproj",
+        "packagesPath": "/Users/b/.nuget/packages/",
+        "outputPath": "/Users/b/Desktop/MIS/TCSexample/api/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\jmart\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/b/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -71,7 +71,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.401/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

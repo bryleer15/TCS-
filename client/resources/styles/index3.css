@@ -1,0 +1,71 @@
+/* General body style */
+body {
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    background-color: #790101; /* Light background */
+    padding: 10px;
+
+}
+
+/* Custom form style */
+.custom-form {
+    background-color: #f6dbdb; /* White background for form */
+    border: 1px solid #790101;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px rgba(59, 54, 54, 0.856);
+}
+
+/* Styling form labels */
+.form-label {
+    font-weight: bold;
+    color: #790101; /* Darker label text */
+}
+
+/* Input field styles */
+.form-control {
+    border: 1px solid #790101;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+/* Button styling */
+.btn-primary {
+    background-color: #aa0606; /* Bootstrap blue */
+    border-color: #aa0606;
+    padding: 10px;
+
+}
+
+.btn-primary:hover {
+    background-color: #790101; /* Darker on hover */
+    border-color: #aa0606;
+}
+
+/* Title style */
+h4 {
+    color: #aa0606;
+    margin-bottom: 20px;
+    font-size: 30px;
+    border-radius: 20px; /* Rounded corners */
+}
+
+/* Custom styles for the card */
+.card {
+    background-color: #e5e2e2; /* Light background */
+    border-radius: 20px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    border: 1px solid #790101; /* Light grey border */
+}
+
+.card-header {
+    background-color: #000000; /* Bootstrap primary color */
+    padding: 20px;
+    border-radius: 20px; /* Rounded corners */
+}
+
+.card-body {
+    padding: 30px;
+    border-radius: 20px; /* Rounded corners */
+
+}
+

@@ -1,50 +1,218 @@
-/* The grid: Four equal columns that floats next to each other */
-.column {
-    float: left;
-    width: 25%;
-    padding: 10px;
+body{
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    display: block;
+    background-color: #fff;
+}
+
+p{
+    display: block;
+    font-style: oblique;
+    padding: 0px;
+    margin: 0px;
+    color: black;
+}
+
+
+h1 {
+  font-size: 70px;
+  font-weight: 900;
+  color: #790101;
+  position: relative;
+  display: flex;
+  justify-content: center; /* Centers text horizontally */
+  align-items: center;     /* Centers text vertically */
+  text-align: center;
+  border: 5px double #790101;
+  border-radius: 20px;
+  background-image: url("https://i.pinimg.com/474x/52/be/1e/52be1e96b6671384c44e043165078581.jpg");
+  background-size:contain;  /* Ensure image covers the entire background */
+  background-position: center; /* Center the background image */
+  padding: 50px;
+}
+
+h2 {
+    display: block;
+    font-style: oblique;
+    color: black;
+
+}
+
+hr {
+  border-top: 2px solid rgb(0, 0, 0); /* Dark red color */
+  margin: 20px 0; /* Add space above and below the line */
+  width: 80%; /* Line width as a percentage of its container */
+  margin-left: auto;
+  margin-right: auto; /* Center the line */
+}
+
+
+h3 {
+  font-size: 40px;;
+  position: relative;
+  display: flexbox;
+  text-align: center;
+  padding: 50px;
+  color: black;
+}
+
+h4 {
+  font-size: 40px;;
+  position: relative;
+  display: flexbox;
+  text-align: center;
+  padding: 50px;
+  color:#000000;
+}
+
+
+
+.row {
+    display: flex;
+    flex-wrap: wrap; /* Ensures images wrap to the next line if needed */
+    text-align: center;
+  }
+  
+  /* Keep the same style for the columns */
+  .column {
+    flex: 1; /* Each column takes up equal space */
+    max-width: 24%; /* Limit the width of each column */
+    text-align: center;
+    border: 8px solid;
+    border-color: #790101;
+    background-color: #ffffff;
+    border-style: solid;
+    border-radius: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: #000000;
+    padding: 0%;
   }
   
   /* Style the images inside the grid */
   .column img {
-    background-image:"https://media.istockphoto.com/id/1449501412/vector/baseball-ball-vector-illustration.jpg?s=612x612&w=0&k=20&c=nYwDttd1C9zB26Ajam9DQRFIbav0CBBTMgiuFwEQvLc=";
+    width: 30%; /* Ensure images take up the full width of the column */
     opacity: 0.8;
     cursor: pointer;
+    text-align: center;
+    padding: 0px;
+    margin-left: 0px; /* Tighter margin on the left */
+    margin-right: 0px;
   }
   
   .column img:hover {
     opacity: 1;
   }
   
-  /* Clear floats after the columns */
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-  
-  /* The expanding image container (positioning is needed to position the close button and the text) */
+  /* Expanding image container */
   .container {
-    position: fixed;
-    display:flex;
+    position: relative;
+    display: none;
+    padding: 0%;
   }
+ 
   
-  /* Expanding image text */
-  #imgtext {
-    position: fixed;
-    bottom: 15px;
-    left: 15px;
-    color: white;
-    font-size: 20px;
-  }
-  
-  /* Closable button inside the image */
-  .closebtn {
-    position:fixed;
-    top: 10px;
-    right: 15px;
-    color: white;
-    font-size: 35px;
-    cursor: pointer;
-  }
-  
+
+  /* Styling the card container */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Center align cards */
+  gap: 20px; /* Adds spacing between cards */
+  padding: 20px;
+  margin: 0 auto;
+}
+
+/* Styling individual cards */
+.card {
+  border: 4px solid #790101; /* Blue border for the card */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hover effect transition */
+  background-color: #fff; /* White background */
+  overflow: hidden;
+  padding: 6px;
+}
+
+/* Hover effect on cards */
+.card:hover {
+  transform: translateY(-5px); /* Slight lift on hover */
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+/* Styling the image inside the card */
+.card-img-top {
+  width: 100%;
+  height: 300px; /* Fixed height for images */
+  object-fit: cover; /* Ensures image fits without distortion */
+  border: 2px solid #000000; /* Add border below the image */
+  border-radius: 15px;
+}
+
+/* Styling the card body */
+.card-body {
+  padding: 15px;
+  text-align: center; /* Center align text inside the card */
+}
+
+/* Card title styling */
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #790101; /* Blue text for title */
+}
+
+/* Card text styling */
+.card-text {
+  font-size: 1rem;
+  color: #000000;
+  margin-bottom: 10px;
+}
+
+/* Styling the button */
+.btn {
+  background-color: #790101;
+  border: none;
+  color: #ffffff;
+  padding: 10px 15px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background-color: #aa0606; /* Darker on hover */
+    border-color: #aa0606;
+}
+
+/* General form container */
+form {
+  max-width: auto;
+  margin: 0 auto;
+  padding: 20px;
+  color:#000000;
+  background-color: white;
+
+}
+/* Form labels */
+label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+  color: #000000;
+}
+
+/* Input fields */
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  font-size: 14px;
+  background-color: #790101;
+  box-sizing: border-box;
+}

@@ -1,0 +1,230 @@
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    }
+    
+    
+    .b-example-divider {
+    width: 100%;
+    height: 3rem;
+    background-color: rgba(0, 0, 0, .1);
+    border: solid rgba(0, 0, 0, .15);
+    border-width: 1px 0;
+    box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+    }
+    
+    .b-example-vr {
+    flex-shrink: 0;
+    width: 1.5rem;
+    height: 100vh;
+    }
+    
+    .bi {
+    vertical-align: -.125em;
+    fill: currentColor;
+    }
+    
+    .nav-scroller {
+    position: relative;
+    z-index: 2;
+    height: 2.75rem;
+    overflow-y: hidden;
+    }
+    
+    .nav-scroller .nav {
+    display: flex;
+    flex-wrap: nowrap;
+    padding-bottom: 1rem;
+    margin-top: -1px;
+    overflow-x: auto;
+    text-align: center;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    }
+    
+    .btn-bd-primary {
+    --bd-violet-bg: #712cf9;
+    --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+    
+    --bs-btn-font-weight: 600;
+    --bs-btn-color: var(--bs-white);
+    --bs-btn-bg: var(--bd-violet-bg);
+    --bs-btn-border-color: var(--bd-violet-bg);
+    --bs-btn-hover-color: var(--bs-white);
+    --bs-btn-hover-bg: #6528e0;
+    --bs-btn-hover-border-color: #6528e0;
+    --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+    --bs-btn-active-color: var(--bs-btn-hover-color);
+    --bs-btn-active-bg: #5a23c8;
+    --bs-btn-active-border-color: #5a23c8;
+    }
+    
+    .bd-mode-toggle {
+    z-index: 1500;
+    }
+    
+    .bd-mode-toggle .dropdown-menu .active .bi {
+    display: block !important;
+    }
+
+
+
+
+
+
+    .row {
+        display: flex;
+        flex-wrap: wrap; /* Ensures images wrap to the next line if needed */
+        text-align: center;
+      }
+      
+      /* Keep the same style for the columns */
+      .column {
+        flex: 1; /* Each column takes up equal space */
+        max-width: 24%; /* Limit the width of each column */
+        text-align: center;
+        border: 8px solid;
+        border-color: #790101;
+        background-color: #ffffff;
+        border-style: solid;
+        border-radius: 20px;
+        margin-left: 10px;
+        margin-right: 10px;
+        color: #000000;
+        padding: 0%;
+      }
+      
+      
+      /* Expanding image container */
+      .container {
+        position: relative;
+        display: none;
+        padding: 0%;
+      }
+     
+      
+    
+    /* Container for cards */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center align cards */
+    gap: 15px; /* Adds smaller spacing between cards */
+    padding: 10px;
+    margin: 0 auto;
+}
+
+/* Styling individual cards */
+.card {
+    border: 4px solid #790101; /* Blue border for the card */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hover effect transition */
+    background-color: #fff; /* White background */
+    overflow: hidden;
+    padding: 6px;
+  }
+
+/* Styling the image inside the card */
+.card-img-top {
+    width: 100%;
+    height: 1000px; /* Increase the height for a bigger image */
+    object-fit: cover; /* Ensures the image fits without distortion */
+    border: 1px solid #000000; /* Add border below the image */
+    border-radius: 8px; /* Smaller border radius */
+}
+
+
+/* Styling the card body */
+.card-body {
+    padding: 10px;
+    text-align: center; /* Center align text inside the card */
+}
+
+/* Card title styling */
+.card-title {
+    font-size: 1.1rem; /* Smaller title font size */
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #790101; /* Red text for title */
+}
+
+/* Card text styling */
+.card-text {
+    font-size: 0.9rem; /* Slightly smaller text size */
+    color: #000000;
+    margin-bottom: 1px;
+}
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: 200px 1fr; /* Sidebar gets 200px, content takes the rest */
+      }
+       
+      .sidebar {
+        background-color: #333;
+        color: white;
+        height: 100vh; /* Sidebar full height */
+        padding: 20px;
+        position: fixed; /* Keeps sidebar fixed */
+      }
+       
+      .main-content {
+        margin-left: 220px; /* Match sidebar width + padding */
+        padding: 20px;
+    
+      }
+
+      /* Flip card container */
+.flip-card {
+    background-color: transparent;
+    height: 300px;
+    perspective: 1000px; /* Remove perspective if you don't want 3D effect */
+    width: 15rem; /* Reduce card width */
+    border: 10px solid #790101; /* Thinner border for the card */
+    border-radius: 8px; /* Smaller rounded corners */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hover effect transition */
+    background-color: #fff; /* White background */
+    overflow: hidden;
+    padding: 5px; /* Reduce padding */
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+.flip-card-front {
+    background-color: #fff;
+    color: black;
+}
+
+.flip-card-back {
+    background-color: #790101;
+    color: white;
+    transform: rotateY(180deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
