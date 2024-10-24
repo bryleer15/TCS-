@@ -16,5 +16,6 @@ namespace api.Models
         public string Type { get; set; }
         public int ID { get; set; }
         public string Pic  { get; set; }
+        public string Description { get; set; }
     }
 }
