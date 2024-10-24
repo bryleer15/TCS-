@@ -1,6 +1,7 @@
 /* General body style */
 body {
     font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: lighter;
     background-color: #790101; /* Light background */
     padding: 10px;
 
@@ -59,12 +60,12 @@ h4 {
 
 .card-header {
     background-color: #000000; /* Bootstrap primary color */
-    padding: 20px;
+    padding: 10px;
     border-radius: 20px; /* Rounded corners */
 }
 
 .card-body {
-    padding: 30px;
+    padding: 10px;
     border-radius: 20px; /* Rounded corners */
 
 }

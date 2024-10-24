@@ -11,10 +11,17 @@
       displayData()
       getBaseball()
   }
+
   async function getAllData() {
-      let response = await fetch(url)
-      data = await response.json(data)
-  }
+    try {
+        let response = await fetch(url);
+        if (!response.ok) throw new Error('Network response was not ok');
+        data = await response.json();
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+    }
+}
+
 
 
   async function displayData() {
@@ -23,12 +30,12 @@
     data.forEach(function(data){
         html += `
             <div class="card m-4" style="width: 18rem;">
-                <img src="${data.pic}" class="card-img-top" alt="...">
+                <img src="${data.pic}" class="card-img-top">
                 <div class="card-body">
                     <h5 class="card-title">${data.firstName} ${data.lastName}</h5>
                     <p class="card-text">${data.team}</p>
                     <p class="card-text">${data.sport}</p>
-                    <a href="${data.price}" class="btn btn-primary">More Info</a>
+                    <a href="./index5.html" class="btn btn-primary " onclick = "passInfo('${data.pic}','${data.firstName}','${data.lastName}','${data.sport}','${data.price}','${data.team}')">More Info</a>
                 </div>
             </div>
         `
@@ -38,23 +45,26 @@
 }
 
 
-async function getBaseball(){
+async function getBaseball() {
     let html = `<div class="row">`;
 
-    data.forEach(function(data){
+    data.forEach(function(data) {
         if (data.sport === "Baseball") {  // Filter only Baseball sport
             html += `
                 <div class="flip-card m-4" style="width: 18rem;">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
-                            <img src="${data.pic}" class="card-img-top" alt="${data.firstName} ${data.lastName}" style="width:100%; height: 200px;">
+                            <img src="${data.pic}" class="card-img-top" alt="${data.firstName} ${data.lastName}" style="width:100%; height: 385px;">
                             <h5>${data.firstName} ${data.lastName}</h5>
                         </div>
                         <div class="flip-card-back">
                             <h5>${data.firstName} ${data.lastName}</h5>
-                            <p>${data.team}</p>
-                            <p>${data.sport}</p>
-                            <a href="${data.price}" class="btn btn-primary">Buy Now</a>
+                            <p>Team: ${data.team}</p>
+                            <p>Sport: ${data.sport}</p>
+                             <p>PSA Rating: ${data.rating}</p>
+                              <p>Price: $${data.price}</p>
+                             <p>${data.description}</p>
+                            <a href="${data.price}" class="btn-primary">Buy Now</a>
                         </div>
                     </div>
                 </div>
@@ -63,5 +73,15 @@ async function getBaseball(){
     });
 
     html += "</div>";
-    document.getElementById("data2").innerHTML = html;
+
+    // Check if the element exists before trying to set innerHTML
+    const data2Element = document.getElementById("data2");
+    if (data2Element) {
+        data2Element.innerHTML = html;
+    } else {
+        console.error('Element with ID "data2" not found');
+    }
 }
+
+
+
