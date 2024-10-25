@@ -8,6 +8,7 @@ body {
     font-weight: lighter;
 }
 
+/* Header styling */
 h1 {
     font-size: 70px;
     font-weight: 900;
@@ -36,10 +37,10 @@ h1 {
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     background-color: #790101;
 }
-.baseball-title{
+
+.baseball-title {
     font-size: 50px;
     color: #000;
-
 }
 
 .flex-shrink-0 a {
@@ -84,23 +85,22 @@ h1 {
 }
 
 /* Main content styling */
-.main-content {
+main.container {
     margin-left: 300px; /* Space for the sidebar */
-    padding: 20px; /* Padding for the main content */
+    padding: 20px;
 }
 
-/* Container for cards */
+/* Row styling for card */
 .row {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-    padding: 10px;
-    margin: 0 auto;
+    align-items: center; /* Vertically center content */
+    justify-content: space-between;
+    gap: 20px; /* Space between image and text */
 }
 
-/* Styling individual cards */
+/* Card container styling */
 .card {
+    display: flex;
     border: 8px solid #790101; /* Border color */
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
@@ -108,93 +108,71 @@ h1 {
     background-color: #fff; /* White background */
     overflow: hidden;
     height: 450px; /* Height of the entire card */
+    padding: 20px;
+}
+
+/* Column styling for the image */
+.col-md-6.text-end img {
+    max-width: 100%; /* Make sure the image is responsive */
+    height: 300px; /* Set height for the image */
+    object-fit: cover; /* Keep image aspect ratio and avoid distortion */
+    border: 2px solid #000000; /* Add a border around the image */
+    border-radius: 10px; /* Slight rounding of corners */
+    margin: 0 auto;
+}
+
+/* Column styling for the text */
+.col-md-6 {
     display: flex;
-    flex-direction: column; /* Stack image and body vertically */
-}
-
-/* Styling the image inside the card */
-.card-img-top {
-    width: 100%;
-    height: 300px; /* Fixed height for images */
-    object-fit: cover; /* Ensures image fits without distortion */
-    border: 2px solid #000000; /* Add border below the image */
-}
-
-/* Styling the card body */
-.card-body {
-    padding: 5px; /* Add padding to card body */
-    text-align: center;
-}
-
-/* Card text styling */
-.card-text {
-    font-size: 0.9rem;
-    color: #000;
-    margin-bottom: 1px;
-}
-
-/* Flip card styles */
-.flip-card {
-    background-color: transparent;
-    height: 450px;
-    padding: 5px;
-    perspective: 1000px;
-    width: 15rem;
-    border: 8px solid #790101;
-    border-radius: 15px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    background-color: #fff;
-    overflow: hidden;
-}
-
-.flip-card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    transition: transform 0.6s;
-    transform-style: preserve-3d;
-}
-
-.flip-card:hover .flip-card-inner {
-    transform: rotateY(180deg);
-}
-
-.flip-card-front,
-.flip-card-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-}
-
-.flip-card-back {
-    background-color: #790101;
-    color: white;
-    transform: rotateY(180deg);
-    display: flex;
-    padding: 5px;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
+    justify-content: center; /* Centers the text vertically */
+    align-items: center;     /* Centers the text horizontally */
+    text-align: center;      /* Centers text within the container */
 }
 
-/* Button styling */
-.btn-primary {
-    background-color: #9e7979;
-    border: none;
-    color: #ffffff;
-    padding: 10px 15px;
-    font-size: 1rem;
-    cursor: pointer;
-    border-radius: 5px;
-    text-decoration: none;
+.col-md-6 h2 {
+    font-size: 2rem; /* Larger heading size */
+    color: #790101; /* Color matching the theme */
+    font-weight: 900;
+    margin-bottom: 10px;
 }
 
-.btn-primary:hover {
-    background-color: #7a6767; /* Darker on hover */
-    border-color: #ad9999;
+.col-md-6 p {
+    font-size: 1.2rem; /* Larger font size for better readability */
+    line-height: 1.5; /* Improve line spacing */
+    color: #000000; /* Text color */
+    text-align: center; /* Center the text horizontally */
+    margin: 10px 0; /* Add vertical margin to space out elements */
 }
 
-/* Additional styles can go here */
+
+/* Hover effect for the card */
+.card:hover {
+    transform: scale(1.05); /* Scale up the card slightly on hover */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
+}
+
+/* Ensure that columns are aligned side by side */
+.container {
+    margin-top: 20px;
+}
+
+/* Card information styling */
+#card-title {
+    font-size: 2rem;
+    color: #790101;
+    font-weight: 700;
+}
+
+#card-description {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+/* Image responsiveness */
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+    border: 2px solid #000; /* Optional: Add a border around the image */
+    border-radius: 10px; /* Optional: Slightly rounded corners for the image */
+}

@@ -10,6 +10,7 @@
       await getAllData()
       displayData()
       getBaseball()
+       loadCardData()
   }
 
   async function getAllData() {
@@ -35,7 +36,7 @@
                     <h5 class="card-title">${data.firstName} ${data.lastName}</h5>
                     <p class="card-text">${data.team}</p>
                     <p class="card-text">${data.sport}</p>
-                    <a href="./index5.html" class="btn btn-primary " onclick = "passInfo('${data.pic}','${data.firstName}','${data.lastName}','${data.sport}','${data.price}','${data.team}')">More Info</a>
+                    <a href="./index5.html" class="btn btn-primary " onclick = "passInfo('${data.pic}','${data.firstName}','${data.lastName}','${data.sport}','${data.price}','${data.rating}','${data.team}', '${data.description}')">More Info</a>
                 </div>
             </div>
         `
@@ -84,4 +85,59 @@ async function getBaseball() {
 }
 
 
+ async function passInfo(pic, firstName, lastName, sport, price, rating, team, description){
+    console.log(pic, firstName, lastName, sport, price, team, description);
+    const cardData = {
+        pic: pic,
+        firstName: firstName,
+        lastName: lastName,
+        sport: sport,
+        price: price,
+        rating: rating,
+        team: team,
+        description: description
+    };
+    console.log("Storing card data:", cardData);
+    localStorage.setItem('cardData', JSON.stringify(cardData));
 
+    window.location.href = './index5.html';
+    
+}
+
+
+function loadCardData() {
+    const cardData = JSON.parse(localStorage.getItem('cardData'));
+
+    if (cardData) {
+        console.log("Loaded card data:", cardData); // Debugging line
+        buildTable2(cardData);
+    } else {
+        console.error("No card data found in localStorage");
+    }
+}
+
+
+ function buildTable2(cardData){
+    console.log("Storing card data:", cardData);
+
+    let html = `
+           <main class="container">
+    <div class="row">
+        <div class="col-md-6 text-start">
+            <img id="card-image" src="${cardData.pic}" alt="Card Image" class="img-fluid" style="max-width: 100%; height: auto;">
+        </div>
+
+        <div class="col-md-6">
+            <h2 id="card-title">Card Information</h2>
+            <p id="card-description"><strong>Name:</strong> ${cardData.firstName} ${cardData.lastName}</p>
+            <p id="card-description"><strong>Rating:</strong> ${cardData.rating}</p>
+            <p id="card-description"><strong>Price:</strong> $${cardData.price}</p>
+            <p id="card-description"><strong>Team:</strong> ${cardData.team}</p>
+            <p id="card-description"><strong>Sport:</strong> ${cardData.sport}</p>
+            <p id="card-description"><strong>Description:</strong> ${cardData.description}</p>
+        </div>
+    </div>
+</main>
+    `;
+    document.getElementById("solo").innerHTML = html
+}
