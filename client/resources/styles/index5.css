@@ -15,20 +15,20 @@ h1 {
     color: #790101;
     position: relative;
     display: flex;
-    justify-content: center; /* Centers text horizontally */
-    align-items: center;     /* Centers text vertically */
+    justify-content: center;
+    align-items: center;
     text-align: center;
     border: 5px double #790101;
     border-radius: 20px;
     background-image: url("https://i.pinimg.com/474x/52/be/1e/52be1e96b6671384c44e043165078581.jpg");
-    background-size: contain;  /* Ensure image covers the entire background */
-    background-position: center; /* Center the background image */
+    background-size: contain;
+    background-position: center;
     padding: 50px;
 }
 
 /* Sidebar styling */
 .flex-shrink-0 {
-    height: 100vh; /* Full height */
+    height: 100vh;
     position: fixed;
     top: 0;
     left: 0;
@@ -86,70 +86,87 @@ h1 {
 
 /* Main content styling */
 main.container {
-    margin-left: 300px; /* Space for the sidebar */
+    margin-left: 300px;
     padding: 20px;
 }
 
 /* Row styling for card */
 .row {
     display: flex;
-    align-items: center; /* Vertically center content */
-    justify-content: space-between;
-    gap: 20px; /* Space between image and text */
+    flex-direction: row; /* Ensures image and text are side by side */
+    align-items: center;
+    gap: 20px;
 }
 
 /* Card container styling */
 .card {
     display: flex;
-    border: 8px solid #790101; /* Border color */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hover effect transition */
-    background-color: #fff; /* White background */
-    overflow: hidden;
-    height: 450px; /* Height of the entire card */
+    flex-direction: row; /* Ensures the card items align in a row */
+    border: 8px solid #790101;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #fff;
+    height: 450px;
     padding: 20px;
 }
 
-/* Column styling for the image */
-.col-md-6.text-end img {
-    max-width: 100%; /* Make sure the image is responsive */
-    height: 300px; /* Set height for the image */
-    object-fit: cover; /* Keep image aspect ratio and avoid distortion */
-    border: 2px solid #000000; /* Add a border around the image */
-    border-radius: 10px; /* Slight rounding of corners */
-    margin: 0 auto;
+/* Image container styling */
+.image-container {
+    width: 350px; /* Set fixed width for the container */
+    height: 500px; /* Set fixed height for the container */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Ensures the image doesn't spill outside */
+    border: 2px solid #000000;
+    border-radius: 10px;
+}
+
+/* Image styling within the container */
+.image-container img {
+    width: 100%;         /* Image fills container width */
+    height: 100%;        /* Image fills container height */
+    object-fit: cover;   /* Ensures the image covers the entire container */
+    border-radius: 10px; /* Maintains the rounded corners */
 }
 
 /* Column styling for the text */
 .col-md-6 {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centers the text vertically */
-    align-items: center;     /* Centers the text horizontally */
-    text-align: center;      /* Centers text within the container */
+    justify-content: center;
+    text-align: center;
+}
+
+
+/* Column styling for the text */
+.col-md-6 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
 }
 
 .col-md-6 h2 {
-    font-size: 2rem; /* Larger heading size */
-    color: #790101; /* Color matching the theme */
+    font-size: 2rem;
+    color: #790101;
     font-weight: 900;
     margin-bottom: 10px;
 }
 
 .col-md-6 p {
-    font-size: 1.2rem; /* Larger font size for better readability */
-    line-height: 1.5; /* Improve line spacing */
-    color: #000000; /* Text color */
-    text-align: center; /* Center the text horizontally */
-    margin: 10px 0; /* Add vertical margin to space out elements */
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: #000000;
+    text-align: center;
+    margin: 10px 0;
 }
-
 
 /* Hover effect for the card */
 .card:hover {
-    transform: scale(1.05); /* Scale up the card slightly on hover */
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
+    transform: scale(1.05);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Ensure that columns are aligned side by side */
@@ -173,6 +190,6 @@ main.container {
 .img-fluid {
     max-width: 100%;
     height: auto;
-    border: 2px solid #000; /* Optional: Add a border around the image */
-    border-radius: 10px; /* Optional: Slightly rounded corners for the image */
+    border: 2px solid #000;
+    border-radius: 10px;
 }

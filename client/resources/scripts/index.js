@@ -117,27 +117,29 @@ function loadCardData() {
 }
 
 
- function buildTable2(cardData){
+function buildTable2(cardData) {
     console.log("Storing card data:", cardData);
 
     let html = `
-           <main class="container">
-    <div class="row">
-        <div class="col-md-6 text-start">
-            <img id="card-image" src="${cardData.pic}" alt="Card Image" class="img-fluid" style="max-width: 100%; height: auto;">
-        </div>
-
-        <div class="col-md-6">
-            <h2 id="card-title">Card Information</h2>
-            <p id="card-description"><strong>Name:</strong> ${cardData.firstName} ${cardData.lastName}</p>
-            <p id="card-description"><strong>Rating:</strong> ${cardData.rating}</p>
-            <p id="card-description"><strong>Price:</strong> $${cardData.price}</p>
-            <p id="card-description"><strong>Team:</strong> ${cardData.team}</p>
-            <p id="card-description"><strong>Sport:</strong> ${cardData.sport}</p>
-            <p id="card-description"><strong>Description:</strong> ${cardData.description}</p>
-        </div>
-    </div>
-</main>
+       <main class="container">
+          <div class="row">
+              <div class="col-md-6">
+                  <h2 id="card-title">Card Information</h2>
+                  <p id="card-description"><strong>Name:</strong> ${cardData.firstName} ${cardData.lastName}</p>
+                  <p id="card-description"><strong>Rating:</strong> ${cardData.rating}</p>
+                  <p id="card-description"><strong>Price:</strong> $${cardData.price}</p>
+                  <p id="card-description"><strong>Team:</strong> ${cardData.team}</p>
+                  <p id="card-description"><strong>Sport:</strong> ${cardData.sport}</p>
+                  <p id="card-description"><strong>Description:</strong> ${cardData.description}</p>
+              </div>
+              <div class="col-md-6 text-end">
+                  <div class="image-container">
+                      <img id="card-image" src="${cardData.pic}" alt="Card Image" class="img-fluid" style="max-width: 100%; height: auto;">
+                  </div>
+              </div>
+          </div>
+       </main>
     `;
-    document.getElementById("solo").innerHTML = html
+    
+    document.getElementById("solo").innerHTML = html;
 }
