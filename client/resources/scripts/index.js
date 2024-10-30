@@ -1,6 +1,6 @@
 
   let data = []
-  let url = "http://localhost:5156/api/Data"
+  let url = "http://localhost:5156/api/TCS/"
    
   function handleOnLoad() {
       loadData()

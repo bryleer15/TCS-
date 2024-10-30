@@ -2,28 +2,55 @@ using api.Models;
 using api;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using api.DataBase;
  
 namespace MyApp.Namespace
 {
+
+
     [Route("api/[controller]")]
     [ApiController]
     public class DataController : ControllerBase
     {
-        private static List<Data> MyData = [];
  
-        // GET: api/todo
+        // GET: api/data
         [HttpGet]
-        public List<Data> Get()
+        public async Task<List<Data>> Get()
         {
-            DataFileHandler myDataFileHandler = new DataFileHandler();
-            return myDataFileHandler.GetAllData();
+            Database myDatabase = new();
+            return await myDatabase.GetAllData();
         }
  
-        // POST: api/toDo
-        [HttpPost]
-        public void Post([FromBody] Data myData)
+         // GET: api/recipe/{id}
+        [HttpGet("{inventoryID}", Name = "Get")]
+        public async Task<List<Data>> Get(int inventoryID)
         {
-            System.Console.WriteLine(myData.FirstName);
+            Database myDatabase = new();
+            return await myDatabase.GetData(inventoryID);
+        }
+ 
+        // POST: api/recipe
+        [HttpPost]
+        public async Task Post([FromBody] Data value)
+        {
+            Database myDatabase = new();
+            await myDatabase.InsertData(value);
+        }
+ 
+        [HttpDelete("{inventoryID}")]
+        public async Task Delete(int inventoryID)
+        {
+            Database myDatabase = new();
+            await myDatabase.DeleteData(inventoryID);
+         
+        }
+ 
+         [HttpPut("{inventoryID}")]
+        public async Task Put(int inventoryID, [FromBody] Data value)
+        {
+            System.Console.WriteLine("Made it to put");
+            Database myDatabase = new();
+            await myDatabase.UpdateData(value, inventoryID);
         }
     }
 }
