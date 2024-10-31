@@ -66,3 +66,4 @@
 /Users/b/Desktop/MIS/TCSexample/TCS-/api/obj/Debug/net8.0/api.pdb
 /Users/b/Desktop/MIS/TCSexample/TCS-/api/obj/Debug/net8.0/api.genruntimeconfig.cache
 /Users/b/Desktop/MIS/TCSexample/TCS-/api/obj/Debug/net8.0/ref/api.dll
+/Users/b/Desktop/MIS/TCSexample/TCS-/api/bin/Debug/net8.0/MySqlConnector.dll

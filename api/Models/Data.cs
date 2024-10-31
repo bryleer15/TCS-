@@ -15,9 +15,13 @@ namespace api.Models
         public string Team { get; set; }
         public int Rating { get; set; }
         public string Category { get; set; }
-        public string IsBiddable  { get; set; }
+        public string IsBiddable { get; set; }
         public string Description { get; set; }
-        public string Picture { get; set; }
+        public byte[] Picture { get; set; }
         public string Bought { get; set; }
+ 
+        // This new property will hold the base64 image string
+        public string PictureBase64 { get; set; }
     }
+
 }
