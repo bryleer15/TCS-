@@ -186,7 +186,27 @@ h4 {
     border-color: #aa0606;
 }
 
+.navbar {
+  justify-content: center;
+  font-size: 1.5rem; /* Increase font size */
+  padding-left: 50px;
+  padding-right: 50px;
+}
 
+.navbar-brand,
+.navbar-nav .nav-item .nav-link,
+.navbar-text {
+  font-size: 1.5rem; /* Make all navbar text larger */
+  text-align: center;
+}
+
+.navbar-nav {
+  margin: auto; /* Center the navigation links */
+}
+
+.navbar-text {
+  font-weight: bold; /* Optional: make 'About Us' bold */
+}
 
 
 /* General form container */

@@ -1,6 +1,6 @@
 
   let data = []
-  let url = "http://localhost:5156/api/TCS/"
+  let url = "http://localhost:5156/api/data"
    
   function handleOnLoad() {
       loadData()
@@ -25,35 +25,39 @@
 
 
 
-  async function displayData() {
-    let html = `<div class="row">`
+    async function displayData() {
 
-    data.forEach(function(data){
-        html += `
-            <div class="card m-4" style="width: 18rem;">
-                <img src="${data.pic}" class="card-img-top">
-                <div class="card-body">
-                    <h5 class="card-title">${data.firstName} ${data.lastName}</h5>
-                    <p class="card-text">${data.team}</p>
-                    <p class="card-text">${data.sport}</p>
-                    <a href="./index5.html" class="btn btn-primary " onclick = "passInfo('${data.pic}','${data.firstName}','${data.lastName}','${data.sport}','${data.price}','${data.rating}','${data.team}', '${data.description}')">More Info</a>
-                </div>
-            </div>
-        `
-    })
-    html += "</div>"
-    document.getElementById("data").innerHTML = html
-}
+        let html = `<div class="row">`;
 
+        data.forEach(function(data) {
 
-async function getBaseball() {
-    let html = `<div class="row">`;
-
-    data.forEach(function(data) {
-        if (data.sport === "Baseball") {  // Filter only Baseball sport
             html += `
-                <div class="flip-card m-4" style="width: 18rem;">
-                    <div class="flip-card-inner">
+                 <div class="card m-4" style="width: 18rem;">
+                    <img src="data:image/jpeg;base64,${data.pictureBase64}" class="card-img-top" alt="${data.firstName} ${data.lastName}">
+                    <div class="card-body">
+                        <h5 class="card-title">${data.firstName} ${data.lastName}</h5>
+                        <p class="card-text">${data.team}</p>
+                        <p class="card-text">${data.sport}</p>
+                        <a href="./index5.html" class="btn btn-primary" onclick="passInfo('${data.pictureBase64}','${data.firstName}','${data.lastName}','${data.sport}','${data.price}','${data.rating}','${data.team}', '${data.description}')">More Info</a>
+                    </div>
+                </div>
+            `;
+        });
+ 
+        html += "</div>";
+        document.getElementById("data").innerHTML = html;
+    }
+
+
+
+    async function getBaseball() {
+        let html = `<div class="row">`;
+
+        data.forEach(function(data) {
+            if (data.sport === "Baseball") {  // Filter only Baseball sport
+                html += `
+                    <div class="flip-card m-4" style="width: 18rem;">
+                        <div class="flip-card-inner">
                         <div class="flip-card-front">
                             <img src="${data.pic}" class="card-img-top" alt="${data.firstName} ${data.lastName}" style="width:100%; height: 385px;">
                             <h5>${data.firstName} ${data.lastName}</h5>
@@ -73,36 +77,34 @@ async function getBaseball() {
         }
     });
 
-    html += "</div>";
+        html += "</div>";
 
-    // Check if the element exists before trying to set innerHTML
-    const data2Element = document.getElementById("data2");
-    if (data2Element) {
-        data2Element.innerHTML = html;
-    } else {
-        console.error('Element with ID "data2" not found');
+        const data2Element = document.getElementById("data2");
+        if (data2Element) {
+            data2Element.innerHTML = html;
+        } else {
+            console.error('Element with ID "data2" not found');
+         }
     }
-}
 
 
- async function passInfo(pic, firstName, lastName, sport, price, rating, team, description){
-    console.log(pic, firstName, lastName, sport, price, team, description);
-    const cardData = {
-        pic: pic,
-        firstName: firstName,
-        lastName: lastName,
-        sport: sport,
-        price: price,
-        rating: rating,
-        team: team,
-        description: description
-    };
-    console.log("Storing card data:", cardData);
-    localStorage.setItem('cardData', JSON.stringify(cardData));
-
-    window.location.href = './index5.html';
+    async function passInfo(picBase64, firstName, lastName, sport, price, rating, team, description) {
+        const cardData = {
+            pic: `data:image/jpeg;base64,${picBase64}`, // Use base64 image here
+            firstName: firstName,
+            lastName: lastName,
+            sport: sport,
+            price: price,
+            rating: rating,
+            team: team,
+            description: description
+        };
     
-}
+        localStorage.setItem('cardData', JSON.stringify(cardData));
+        window.location.href = './index5.html';
+    
+    }
+    
 
 
 function loadCardData() {
