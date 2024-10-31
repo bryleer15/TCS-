@@ -24,12 +24,26 @@ namespace MyApp.Namespace
         return await myDatabase.GetAllData();
     }
  
-    // GET: api/data/{id}
     [HttpGet("{inventoryID}", Name = "Get")]
-    public async Task<List<Data>> Get(int inventoryID){
-        Database myDatabase = new();
-        return await myDatabase.GetData(inventoryID);
+public async Task<ActionResult<Data>> Get(int inventoryID)
+{
+    Database myDatabase = new();
+    try
+    {
+        var result = await myDatabase.GetData(inventoryID);
+        if (result == null)
+        {
+            return NotFound();
+        }
+        return Ok(result);
     }
+    catch (Exception ex)
+    {
+        // Log the error if a logging system is in place
+        return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
+    }
+}
+
  
     // POST: api/data
     [HttpPost]
@@ -71,6 +85,18 @@ namespace MyApp.Namespace
         await myDatabase.DeleteData(inventoryID);
         return Ok();
     }
+
+    [HttpGet("{baseball}")]
+public async Task<List<Data>> GetBaseball() {
+    Database myDatabase = new();
+    return await myDatabase.GetBaseball();
+}
+
+[HttpGet("{basketball}")]
+public async Task<List<Data>> GetBasketball() {
+    Database myDatabase = new();
+    return await myDatabase.GetBasketball();
+}
 
 }
 }

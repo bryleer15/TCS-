@@ -169,13 +169,18 @@ namespace api.DataBase
         };
  
     await DataNoReturnSql(sql, parms);
-}
+    }
 
-         public async Task<List<Data>> GetBaseball(){
-             string sql = "SELECT * FROM CARDSMEMORBILLIA WHERE bought != 'Y' AND sport = Baseball Order by rating DESC;";
-             List<MySqlParameter> parms = new();
-             return await SelectData(sql, parms);
-        }
+    public async Task<List<Data>> GetBaseball(){
+        string sql = "SELECT * FROM CARDSMEMORBILLIA WHERE bought != 'Y' AND sport = 'Baseball' ORDER BY rating DESC;";
+        List<MySqlParameter> parms = new();
+        return await SelectData(sql, parms);
+    }
+    public async Task<List<Data>> GetBasketball(){
+        string sql = "SELECT * FROM CARDSMEMORBILLIA WHERE bought != 'Y' AND sport = 'Basketball' ORDER BY rating DESC;";
+        List<MySqlParameter> parms = new();
+        return await SelectData(sql, parms);
+    }
 
 
 
