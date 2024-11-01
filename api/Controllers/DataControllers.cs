@@ -86,17 +86,5 @@ public async Task<ActionResult<Data>> Get(int inventoryID)
         return Ok();
     }
 
-    [HttpGet("{baseball}")]
-public async Task<List<Data>> GetBaseball() {
-    Database myDatabase = new();
-    return await myDatabase.GetBaseball();
-}
-
-[HttpGet("{basketball}")]
-public async Task<List<Data>> GetBasketball() {
-    Database myDatabase = new();
-    return await myDatabase.GetBasketball();
-}
-
 }
 }

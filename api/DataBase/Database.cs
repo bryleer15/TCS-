@@ -69,7 +69,7 @@ namespace api.DataBase
  
         public async Task<List<Data>> GetAllData()
         {
-             string sql = "SELECT * FROM CARDSMEMORBILLIA WHERE bought != 'Y' Order by rating DESC;";
+             string sql = "SELECT * FROM CARDSMEMORBILLIA WHERE bought != 'T' Order by rating DESC;";
              List<MySqlParameter> parms = new();
              return await SelectData(sql, parms);
         }
