@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> 
     <link rel="stylesheet" href="./resources/styles/index2.css">
 </head>
-<body onload = "loadSelectedSportData()">
+<body onload="handleOnLoad()">
     <h1>Cards For Sale</h1>
     <div class="d-flex">
         <nav class="flex-shrink-0 p-3 sidebar">
@@ -64,7 +64,10 @@
             </ul>
         </nav>
 
-        <div id="data2" class="row"></div> <!-- Display filtered cards here -->
+        <div class="main-content" id="data2" style="margin-left: 300px; padding-top: 80px;"> <!-- Space for sidebar and adjust top padding -->
+            <!-- Display filtered cards here -->
+            <div class="row"></div>
+        </div>
     </div>
 
     <script src="./resources/scripts/index.js"></script>

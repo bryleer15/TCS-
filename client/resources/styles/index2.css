@@ -36,10 +36,10 @@ h1 {
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     background-color: #790101;
 }
-.baseball-title{
+
+.baseball-title {
     font-size: 50px;
     color: #000;
-
 }
 
 .flex-shrink-0 a {
@@ -196,5 +196,3 @@ h1 {
     background-color: #7a6767; /* Darker on hover */
     border-color: #ad9999;
 }
-
-/* Additional styles can go here */
