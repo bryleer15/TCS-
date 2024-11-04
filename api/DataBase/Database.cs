@@ -141,35 +141,6 @@ namespace api.DataBase
 }
 
  
-    public async Task UpdateData(Data myData, int inventoryID){
-    
- 
-        string sql = @$"UPDATE CARDSMEMORBILLIA 
-                    SET Sport = @sport, Price = @price, FirstName = @firstName, 
-                        LastName = @lastName, Team = @team, Rating = @rating, 
-                        Category = @category, IsBiddable = @isBiddable, 
-                        Descriptions = @descriptions,  Bought = @bought, Picture = @picture
-                    WHERE inventoryID = @inventoryID;";
-
-        List<MySqlParameter> parms = new(){
-            new MySqlParameter("@inventoryID", MySqlDbType.Int32) { Value = inventoryID },
-            new MySqlParameter("@sport", MySqlDbType.String) { Value = myData.Sport },
-            new MySqlParameter("@price", MySqlDbType.Double) { Value = myData.Price },
-            new MySqlParameter("@firstName", MySqlDbType.String) { Value = myData.FirstName },
-            new MySqlParameter("@lastName", MySqlDbType.String) { Value = myData.LastName },
-            new MySqlParameter("@team", MySqlDbType.String) { Value = myData.Team },
-            new MySqlParameter("@rating", MySqlDbType.Int32) { Value = myData.Rating },
-            new MySqlParameter("@isBiddable", MySqlDbType.String) { Value = "F" },
-            new MySqlParameter("@category", MySqlDbType.String) { Value = myData.Category },
-            new MySqlParameter("@descriptions", MySqlDbType.String) { Value = myData.Descriptions },
-            new MySqlParameter("@bought", MySqlDbType.String) { Value = "F" } ,
-            new MySqlParameter("@picture", MySqlDbType.String) { Value = myData.Picture } // Update image data
-
-        };
- 
-    await DataNoReturnSql(sql, parms);
-    }
-
 
     public async Task<List<Data>> GetTab(){  
         string sql = "SELECT COUNT FROM CARDSMEMORBILLIA WHERE bought = 'F'  ORDER BY rating DESC;";

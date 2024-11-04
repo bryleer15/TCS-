@@ -25,7 +25,7 @@ async function getAllData() {
 
 
 
-  async function displayData(limit = 8) {
+  async function displayData(limit = 5) {
 
 
       let html = `<div class="row">`;
@@ -115,6 +115,7 @@ function buildTable2(cardData) {
         <div class="row">
             <div class="col-md-6">
                 <h2 id="card-title">Card Information</h2>
+                <img class="card-img-top" src="${data.picture}" alt="${data.firstName} ${data.lastName}" style="width:100%; height: 385px;">
                 <p id="card-description"><strong>Name:</strong> ${cardData.firstName} ${cardData.lastName}</p>
                 <p id="card-description"><strong>Rating:</strong> ${cardData.rating}</p>
                 <p id="card-description"><strong>Price:</strong> $${cardData.price}</p>
