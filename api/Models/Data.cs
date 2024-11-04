@@ -16,12 +16,11 @@ namespace api.Models
         public int Rating { get; set; }
         public string Category { get; set; }
         public string IsBiddable { get; set; }
-        public string Description { get; set; }
-        public byte[] Picture { get; set; }
+        public string Descriptions { get; set; }
         public string Bought { get; set; }
+        public string Picture { get; set; }
  
-        // This new property will hold the base64 image string
-        public string PictureBase64 { get; set; }
+        
     }
 
 }

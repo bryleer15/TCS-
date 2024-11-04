@@ -173,7 +173,7 @@ h4 {
 .btn {
   background-color: #790101;
   border: none;
-  color: #ffffff;
+  color: #000000;
   padding: 10px 15px;
   font-size: 1rem;
   cursor: pointer;
@@ -233,9 +233,80 @@ input[type="password"] {
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
-  border: 1px solid #000000;
+  border: 1px solid #000000 !important;
   border-radius: 5px;
   font-size: 14px;
   background-color: #790101;
   box-sizing: border-box;
+}
+
+/* Sidebar styling */
+.flex-shrink-0 {
+  height: 100vh; /* Full height */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  border-right: 15px double #000000;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  background-color: #790101;
+}
+
+.baseball-title {
+  font-size: 50px;
+  color: #000;
+}
+
+.flex-shrink-0 a {
+  font-size: 18px;
+  color: #000000;
+  font-weight: bold;
+}
+
+.flex-shrink-0 ul {
+  padding-left: 0;
+}
+
+.flex-shrink-0 .btn-toggle {
+  width: 100%;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #f8f9fa !important;
+  border: none;
+  text-align: left;
+  padding: 10px;
+  transition: background-color 0.3s;
+}
+
+.flex-shrink-0 .btn-toggle:hover {
+  background-color: #790101;
+}
+
+.flex-shrink-0 .collapse.show {
+  background-color: #cc7070;
+  border-radius: 5px;
+}
+
+.flex-shrink-0 .btn-toggle-nav a {
+  padding-left: 20px;
+  color: #000000!important;
+  text-decoration: none;
+}
+
+.flex-shrink-0 .btn-toggle-nav a:hover {
+  background-color: #790101;
+  border-radius: 5px;
+}
+/* Main content styling */
+.main-content {
+    margin-left: 300px; /* Space for the sidebar */
+    padding: 20px; /* Padding for the main content */
+}
+/* Sidebar Links */
+.flex-shrink-0 a,
+.flex-shrink-0 .btn-toggle-nav a {
+    font-size: 18px;
+    color: #000000 !important; /* Ensure black font color */
+    font-weight: bold;
+    text-decoration: none;
 }

@@ -30,9 +30,6 @@ namespace api.DataBase
     using var reader = await command.ExecuteReaderAsync();
     while (await reader.ReadAsync())
     {
-        long length = reader.GetBytes(10, 0, null, 0, 0); // Get the size of the Picture column data
-        byte[] imageData = new byte[length];
-        reader.GetBytes(10, 0, imageData, 0, (int)length); // Read the BLOB data into the byte array
  
         myData.Add(new Data()
         {
@@ -45,9 +42,9 @@ namespace api.DataBase
             Rating = reader.GetInt32(6),
             Category = reader.GetString(7),
             IsBiddable = reader.GetString(8),
-            Description = reader.GetString(9),
-            Picture = imageData,  // Assign the image data
-            Bought = reader.GetString(11)
+            Descriptions = reader.GetString(9),
+            Bought = reader.GetString(10),
+            Picture = reader.GetString(11)
         });
     }
  
@@ -69,7 +66,7 @@ namespace api.DataBase
  
         public async Task<List<Data>> GetAllData()
         {
-             string sql = "SELECT * FROM CARDSMEMORBILLIA WHERE bought != 'T' Order by rating DESC;";
+             string sql = "SELECT * FROM CARDSMEMORBILLIA WHERE bought = 'F' Order by rating DESC;";
              List<MySqlParameter> parms = new();
              return await SelectData(sql, parms);
         }
@@ -94,8 +91,8 @@ namespace api.DataBase
     public async Task InsertData(Data myData){
 
     string sql = @$"INSERT INTO CARDSMEMORBILLIA
-            (sport, price, firstName, lastName, team, rating, category, isBiddable, description, picture, bought)
-            VALUES (@sport, @price, @firstName, @lastName, @team, @rating, @category, @isBiddable, @description, @picture, @bought);";
+            (sport, price, firstName, lastName, team, rating, category, isBiddable, descriptions, bought, picture)
+            VALUES (@sport, @price, @firstName, @lastName, @team, @rating, @category, @isBiddable, @descriptions, @bought, @picture);";
  
     List<MySqlParameter> parms = new(){
         new MySqlParameter("@sport", MySqlDbType.String) { Value = myData.Sport },
@@ -106,9 +103,10 @@ namespace api.DataBase
         new MySqlParameter("@rating", MySqlDbType.Int32) { Value = myData.Rating },
         new MySqlParameter("@isBiddable", MySqlDbType.String) { Value = "F" },
         new MySqlParameter("@category", MySqlDbType.String) { Value = myData.Category },
-        new MySqlParameter("@description", MySqlDbType.String) { Value = myData.Description },
-        new MySqlParameter("@picture", MySqlDbType.Blob) { Value = myData.Picture }, // Insert image data
-        new MySqlParameter("@bought", MySqlDbType.String) { Value = "F" }
+        new MySqlParameter("@descriptions", MySqlDbType.String) { Value = myData.Descriptions },
+        new MySqlParameter("@bought", MySqlDbType.String) { Value = "F" },
+        new MySqlParameter("@picture", MySqlDbType.String) { Value = myData.Picture } // Insert image data
+
     };
  
     await DataNoReturnSql(sql, parms);  
@@ -120,7 +118,7 @@ namespace api.DataBase
         SET Sport = @sport, Price = @price, FirstName = @firstName,
         LastName = @lastName, Team = @team, Rating = @rating,
         Category = @category, IsBiddable = @isBiddable,
-        Description = @description, Picture = @picture, Bought = @bought
+        Descriptions = @descriptions, Bought = @bought, Picture = @picture
         WHERE inventoryID = @inventoryID;";
  
         List<MySqlParameter> parms = new(){
@@ -133,24 +131,24 @@ namespace api.DataBase
         new MySqlParameter("@rating", MySqlDbType.Int32) { Value = myData.Rating },
         new MySqlParameter("@isBiddable", MySqlDbType.String) { Value = "F" },
         new MySqlParameter("@category", MySqlDbType.String) { Value = myData.Category },
-        new MySqlParameter("@description", MySqlDbType.String) { Value = myData.Description },
-        new MySqlParameter("@picture", MySqlDbType.Blob) { Value = myData.Picture }, // Update image data
-        new MySqlParameter("@bought", MySqlDbType.String) { Value = "F" }
+        new MySqlParameter("@descriptions", MySqlDbType.String) { Value = myData.Descriptions },
+        new MySqlParameter("@bought", MySqlDbType.String) { Value = "F" },        
+        new MySqlParameter("@picture", MySqlDbType.String) { Value = myData.Picture } // Update image data
+
     };
  
     await DataNoReturnSql(sql, parms);
 }
 
  
-    public async Task UpdateData(Data myData, int inventoryID, string imagePath){
-        // Read the image file into a byte array
-    byte[] imageData = await File.ReadAllBytesAsync(imagePath);
+    public async Task UpdateData(Data myData, int inventoryID){
+    
  
         string sql = @$"UPDATE CARDSMEMORBILLIA 
                     SET Sport = @sport, Price = @price, FirstName = @firstName, 
                         LastName = @lastName, Team = @team, Rating = @rating, 
                         Category = @category, IsBiddable = @isBiddable, 
-                        Description = @description, Picture = @picture, Bought = @bought
+                        Descriptions = @descriptions,  Bought = @bought, Picture = @picture
                     WHERE inventoryID = @inventoryID;";
 
         List<MySqlParameter> parms = new(){
@@ -163,21 +161,18 @@ namespace api.DataBase
             new MySqlParameter("@rating", MySqlDbType.Int32) { Value = myData.Rating },
             new MySqlParameter("@isBiddable", MySqlDbType.String) { Value = "F" },
             new MySqlParameter("@category", MySqlDbType.String) { Value = myData.Category },
-            new MySqlParameter("@description", MySqlDbType.String) { Value = myData.Description },
-            new MySqlParameter("@picture", MySqlDbType.Blob) { Value = imageData }, // Update image data
-            new MySqlParameter("@bought", MySqlDbType.String) { Value = "F" }
+            new MySqlParameter("@descriptions", MySqlDbType.String) { Value = myData.Descriptions },
+            new MySqlParameter("@bought", MySqlDbType.String) { Value = "F" } ,
+            new MySqlParameter("@picture", MySqlDbType.String) { Value = myData.Picture } // Update image data
+
         };
  
     await DataNoReturnSql(sql, parms);
     }
 
-    public async Task<List<Data>> GetBaseball(){
-        string sql = "SELECT * FROM CARDSMEMORBILLIA WHERE bought != 'Y' AND sport = 'Baseball' ORDER BY rating DESC;";
-        List<MySqlParameter> parms = new();
-        return await SelectData(sql, parms);
-    }
-    public async Task<List<Data>> GetBasketball(){
-        string sql = "SELECT * FROM CARDSMEMORBILLIA WHERE bought != 'Y' AND sport = 'Basketball' ORDER BY rating DESC;";
+
+    public async Task<List<Data>> GetTab(){  
+        string sql = "SELECT COUNT FROM CARDSMEMORBILLIA WHERE bought = 'F'  ORDER BY rating DESC;";
         List<MySqlParameter> parms = new();
         return await SelectData(sql, parms);
     }
@@ -193,8 +188,5 @@ namespace api.DataBase
 
 
 
-
-
 }
 }
-

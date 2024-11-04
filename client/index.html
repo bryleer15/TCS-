@@ -8,24 +8,48 @@
 </head>
 
 <body onload = "handleOnLoad()">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="./index.html">Home</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="navbar-brand" href="./index3.html">Sign Up</a>
-                <button class="navbar-toggler" type="button">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </li>
-        </ul>
-        <span class="navbar-text">About Us</span>
-    </div>
+  <nav class="flex-shrink-0 p-3 sidebar">
+    <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+        <span class="baseball-title">Cards</span>
+    </a>
+    <ul class="list-unstyled ps-0">
+        <li class="mb-1">
+            <a class="btn btn-toggle align-items-center rounded" href="./index.html">Home</a>
+        </li>
+        <li class="mb-1">
+            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
+                Sport
+            </button>
+            <div class="collapse" id="orders-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <li><a href="#" class="link-dark rounded" onclick="selectSport('Basketball')">Basketball</a></li>
+                    <li><a href="#" class="link-dark rounded" onclick="selectSport('Football')">Football</a></li>
+                    <li><a href="#" class="link-dark rounded" onclick="selectSport('Hockey')">Hockey</a></li>
+                    <li><a href="#" class="link-dark rounded" onclick="selectSport('Soccer')">Soccer</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="mb-1">
+            <a class="btn btn-toggle align-items-center rounded" href="./index4.html">Bidding</a>
+        </li>
+        <li class="border-top my-3"></li>
+        <li class="mb-1">
+            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
+                Account
+            </button>
+            <div class="collapse" id="account-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <li><a href="#" class="link-dark rounded">New...</a></li>
+                    <li><a href="#" class="link-dark rounded">Profile</a></li>
+                    <li><a href="#" class="link-dark rounded">Settings</a></li>
+                    <li><a href="#" class="link-dark rounded">Sign out</a></li>
+                </ul>
+            </div>
+        </li>
+    </ul>
 </nav>
 
+<div class="main-content">
     <h1>TUSCALOOSA CARD SHARKS</h1>
     <h2><div class="row">
         <div class="column">
@@ -41,14 +65,18 @@
           <p>Football</p>
         </div>
         <div class="column">
-          <img src="data:image/png;base64,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" alt="Memorbilia" onclick="window.location.href = './index2.html'">
+          <img src="data:image/png;base64,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" alt="Memorbilia" onclick="getCategory('Memorabilia'); window.location.href = './index2.html'">
           <p>Memorbilia</p>
         </div>
       </div>
     </h2>
+
+    
  
     <hr><h3> Avaliable Cards</h3>
       <div id = "data"> </div><hr>
+
+
 
       <h4>Sign In</h4>
       <form class="row g-3">
@@ -67,7 +95,7 @@
       <div id="data" class="row"></div> <!-- Display all cards here -->
 
       </form>
-    
+</div>
 
       <script src = "./resources/scripts/index.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

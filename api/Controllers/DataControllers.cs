@@ -52,7 +52,6 @@ public async Task<ActionResult<Data>> Get(int inventoryID)
         if (imageFile != null){
             using var ms = new MemoryStream();
             await imageFile.CopyToAsync(ms);
-            value.Picture = ms.ToArray();
         }
  
         Database myDatabase = new();
@@ -63,13 +62,7 @@ public async Task<ActionResult<Data>> Get(int inventoryID)
     // PUT: api/data/{inventoryID}
 
     [HttpPut("{inventoryID}")]
-    public async Task<IActionResult> Put(int inventoryID, [FromForm] Data value, IFormFile imageFile){
-
-        if (imageFile != null){
-            using var ms = new MemoryStream();
-            await imageFile.CopyToAsync(ms);
-            value.Picture = ms.ToArray();
-        }
+    public async Task<IActionResult> Put(int inventoryID, [FromForm] Data value){
  
         Database myDatabase = new();
         await myDatabase.UpdateData(value, inventoryID);

@@ -1,5 +1,5 @@
 let data = []
-let sportData = []
+let sportData=[]
 let url = "http://localhost:5156/api/data"
  
 function handleOnLoad() {
@@ -9,11 +9,11 @@ function handleOnLoad() {
 async function loadData() {
     await getAllData()
     displayData()   
-    displaySport()
     loadCardData()
 }
 
 async function getAllData() {
+  
   try {
       let response = await fetch(url);
       if (!response.ok) throw new Error('Network response was not ok');
@@ -25,20 +25,21 @@ async function getAllData() {
 
 
 
-  async function displayData() {
+  async function displayData(limit = 8) {
+
 
       let html = `<div class="row">`;
 
-      data.forEach(function(data) {
+      data.slice(0,limit).forEach(function(data) {
 
           html += `
                <div class="card m-4" style="width: 18rem;">
-                  <img src="data:image/jpeg;base64,${data.pictureBase64}" class="card-img-top" alt="${data.firstName} ${data.lastName}">
+                    <img class="card-img-top" src="${data.picture}" alt="${data.firstName} ${data.lastName}" style="width:100%; height: 385px;">
                   <div class="card-body">
                       <h5 class="card-title">${data.firstName} ${data.lastName}</h5>
                       <p class="card-text">${data.team}</p>
                       <p class="card-text">${data.sport}</p>
-                      <a href="./index5.html" class="btn btn-primary" onclick="passInfo('${data.pictureBase64}','${data.firstName}','${data.lastName}','${data.sport}','${data.price}','${data.rating}','${data.team}', '${data.description}')">More Info</a>
+                      <a href="./index5.html" class="btn btn-primary" onclick="passInfo('${data.firstName}','${data.lastName}','${data.sport}','${data.price}','${data.rating}','${data.team}', '${data.descriptions}')">More Info</a>
                   </div>
               </div>
           `;
@@ -49,76 +50,42 @@ async function getAllData() {
   }
 
 
-
-  async function displaySport(sportData) {
-      let html = `<div class="row">`;
-    sportData = JSON.parse(localStorage.getItem('sportData'));
-
-      sportData.forEach(function(sportData) {
-
-              html += `
-                  <div class="flip-card m-4" style="width: 18rem;">
-                      <div class="flip-card-inner">
-                      <div class="flip-card-front">
-                          <img src="${sportData.picture}" class="card-img-top" alt="${sportData.firstName} ${sportData.lastName}" style="width:100%; height: 385px;">
-                          <h5>${sportData.firstName} ${sportData.lastName}</h5>
-                      </div>
-                      <div class="flip-card-back">
-                          <h5>${sportData.firstName} ${sportData.lastName}</h5>
-                          <p>Team: ${sportData.team}</p>
-                          <p>Sport: ${sportData.sport}</p>
-                           <p>PSA Rating: ${sportData.rating}</p>
-                            <p>Price: $${sportData.price}</p>
-                           <p>${sportData.description}</p>
-                          <a href="${sportData.price}" class="btn-primary">Buy Now</a>
-                      </div>
-                  </div>
-              </div>
-          `;
-  });
-
-      html += "</div>";
-
-      const data2Element = document.getElementById("data2");
-      if (data2Element) {
-          data2Element.innerHTML = html;
-      } else {
-          console.error('Element with ID "data2" not found');
-       }
-  }
-
-
   async function getSport(sport) {
-    console.log(sport);
-    try {
-        let response = await fetch(url);
-        if (!response.ok) throw new Error('Network response was not ok');
-        
-        let data = await response.json();
-        
-        // Filter for baseball data only
-        sportData = data.filter(data => data.sport === sport);
-        localStorage.setItem('sportData', JSON.stringify(sportData));
+        console.log(sport)
 
-        
-    } catch (error) {
-        console.error('There was a problem with the fetch operation:', error);
-    }
+        await getAllData();
+
+        sportData = data.filter(item => item.sport === sport);
+    
+        // Store and log the filtered sport data
+        localStorage.setItem('sportData', JSON.stringify(sportData));
+        console.log(sportData);
+}
+
+async function getCategory(category) {
+   
+
+    await getAllData();
+
+    sportData = data.filter(item => item.category === category);
+
+    // Store and log the filtered sport data
+    localStorage.setItem('sportData', JSON.stringify(sportData)); 
     console.log(sportData);
-    displaySport(sportData);
 }
 
 
-  async function passInfo(picBase64, firstName, lastName, sport, price, rating, team, description) {
+  async function passInfo(firstName, lastName, sport, price, rating, team, descriptions, picture) {
       const cardData = {
-          pic: `data:image/jpeg;base64,${picBase64}`, // Use base64 image here
+         
           firstName: firstName,
           lastName: lastName,
           sport: sport,
           price: price,
           rating: rating,
           team: team,
-          description: description
+          descriptions: descriptions,
+          picture: picture
       };
   
       localStorage.setItem('cardData', JSON.stringify(cardData));
@@ -153,11 +120,10 @@ function buildTable2(cardData) {
                 <p id="card-description"><strong>Price:</strong> $${cardData.price}</p>
                 <p id="card-description"><strong>Team:</strong> ${cardData.team}</p>
                 <p id="card-description"><strong>Sport:</strong> ${cardData.sport}</p>
-                <p id="card-description"><strong>Description:</strong> ${cardData.description}</p>
+                <p id="card-description"><strong>Description:</strong> ${cardData.descriptions}</p>
             </div>
             <div class="col-md-6 text-end">
-                <div class="image-container">
-                    <img id="card-image" src="${cardData.pic}" alt="Card Image" class="img-fluid" style="max-width: 100%; height: auto;">
+                <div class="image-container${cardData.picture}">
                 </div>
             </div>
         </div>
@@ -166,3 +132,6 @@ function buildTable2(cardData) {
   
   document.getElementById("solo").innerHTML = html;
 }
+
+
+

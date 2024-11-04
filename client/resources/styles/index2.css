@@ -89,14 +89,17 @@ h1 {
     padding: 20px; /* Padding for the main content */
 }
 
+
 /* Container for cards */
 .row {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
+    justify-content: center !important; /* Centers cards horizontally */
+    align-items: center !important; /* Centers cards vertically */
+    gap: 15px; /* Spacing between cards */
     padding: 10px;
     margin: 0 auto;
+    max-width: 1200px; /* Optional: limit row width to better center on the page */
 }
 
 /* Styling individual cards */
