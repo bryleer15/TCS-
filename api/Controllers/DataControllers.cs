@@ -45,21 +45,15 @@ public async Task<ActionResult<Data>> Get(int inventoryID)
 }
 
  
-    // POST: api/data
     [HttpPost]
-    public async Task<IActionResult> Post([FromForm] Data value, IFormFile imageFile){
-
-        if (imageFile != null){
-            using var ms = new MemoryStream();
-            await imageFile.CopyToAsync(ms);
+        public async Task Post([FromBody] Account value)
+        {
+            System.Console.WriteLine(value.FName);
+            Database myDatabase = new();
+            await myDatabase.InsertAccount(value);
         }
  
-        Database myDatabase = new();
-        await myDatabase.InsertData(value);
-        return Ok();
-    }
- 
-    // PUT: api/data/{inventoryID}
+
 
     [HttpPut("{inventoryID}")]
     public async Task<IActionResult> Put(int inventoryID, [FromForm] Data value){

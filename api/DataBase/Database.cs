@@ -149,6 +149,29 @@ namespace api.DataBase
     }
 
 
+    public async Task InsertAccount(Account myAccount){
+
+    string sql = @$"INSERT INTO ACCOUNT
+            (email, pass_word, fname, lname, address, city, state, zip_code, isAdmin)
+            VALUES ( @email, @password, @fname, @lname, @address, @city, @state, @zip, @isAdmin);";
+ 
+    List<MySqlParameter> parms = new(){
+        new MySqlParameter("@email", MySqlDbType.String) { Value = myAccount.Email },
+        new MySqlParameter("@pass_word", MySqlDbType.String) { Value = myAccount.Password },
+        new MySqlParameter("@fname", MySqlDbType.String) { Value = myAccount.FName },
+        new MySqlParameter("@lname", MySqlDbType.String) { Value = myAccount.LName },
+        new MySqlParameter("@address", MySqlDbType.String) { Value = myAccount.Address },
+        new MySqlParameter("@city", MySqlDbType.String) { Value = myAccount.City},
+        new MySqlParameter("@state", MySqlDbType.String) { Value = myAccount.State },
+        new MySqlParameter("@zip_code", MySqlDbType.String) { Value = myAccount.Zip },
+        new MySqlParameter("@idAdmin", MySqlDbType.String) { Value = "F" }
+
+    };
+ 
+    await DataNoReturnSql(sql, parms);  
+}
+
+
 
 
 
