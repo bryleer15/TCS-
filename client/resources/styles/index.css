@@ -13,6 +13,8 @@ p{
 }
 
 
+
+
 h1 {
   font-size: 90px;
   font-weight: 900;
@@ -279,7 +281,7 @@ input[type="password"] {
 }
 
 .flex-shrink-0 .btn-toggle:hover {
-  background-color: #790101;
+  background-color: #9f3535 !important;
 }
 
 .flex-shrink-0 .collapse.show {
@@ -309,4 +311,8 @@ input[type="password"] {
     color: #000000 !important; /* Ensure black font color */
     font-weight: bold;
     text-decoration: none;
+}
+
+.btn-primary2{
+  color: #fff;
 }

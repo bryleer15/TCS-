@@ -64,7 +64,7 @@ h1 {
 }
 
 .flex-shrink-0 .btn-toggle:hover {
-    background-color: #790101;
+    background-color: #9f3535;
 }
 
 .flex-shrink-0 .collapse.show {
@@ -86,7 +86,7 @@ h1 {
 /* Main content styling */
 .main-content {
     margin-left: 300px; /* Space for the sidebar */
-    padding: 20px; /* Padding for the main content */
+    padding: 20px !important; /* Padding for the main content */
 }
 
 

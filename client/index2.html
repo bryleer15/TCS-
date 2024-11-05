@@ -15,36 +15,38 @@
             <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
                 <span class="baseball-title">Cards</span>
             </a>
+
             <ul class="list-unstyled ps-0">
                 <li class="mb-1">
                     <a class="btn btn-toggle align-items-center rounded" href="./index.html">Home</a>
                 </li>
+
                 <li class="mb-1">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-                        Team
-                    </button>
-                    <div class="collapse" id="dashboard-collapse">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <!-- <li><a href="#" class="link-dark rounded">Yankees</a></li>
-                            <li><a href="#" class="link-dark rounded">Rockies</a></li>
-                            <li><a href="#" class="link-dark rounded">Giants</a></li>
-                            <li><a href="#" class="link-dark rounded">Mariners</a></li> -->
-                        </ul>
-                    </div>
-                </li>
-                <li class="mb-1">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
-                        Sport
-                    </button>
-                    <div class="collapse" id="orders-collapse">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li><a href="#" class="link-dark rounded" onclick="selectSport('Basketball')">Basketball</a></li>
-                            <li><a href="#" class="link-dark rounded" onclick="selectSport('Football')">Football</a></li>
-                            <li><a href="#" class="link-dark rounded" onclick="selectSport('Hockey')">Hockey</a></li>
-                            <li><a href="#" class="link-dark rounded" onclick="selectSport('Soccer')">Soccer</a></li>
-                        </ul>
-                    </div>
-                </li>
+    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#teams-collapse" aria-expanded="false">
+        Teams
+    </button>
+    <div class="collapse" id="teams-collapse">
+        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <div id="team-list" class="mt-3">
+                <ul id="teams" class="list-group"></ul>
+            </div>
+        </ul>
+    </div>
+</li>
+
+<li class="mb-1">
+    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#sports-collapse" aria-expanded="false">
+        Sports
+    </button>
+    <div class="collapse" id="sports-collapse">
+        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <div id="sport-list" class="mt-3">
+                <ul id="sports" class="list-group"></ul>
+            </div>
+        </ul>
+    </div>
+</li>
+                
                 <li class="mb-1">
                     <a class="btn btn-toggle align-items-center rounded" href="./index4.html">Bidding</a>
                 </li>
@@ -66,7 +68,7 @@
         </nav>
     </div>
 
-        <div  id="data2" style="margin-left: 300px; padding-top: 80px;"> <!-- Space for sidebar and adjust top padding -->
+        <div  id="data2" style="margin-left: 75px; padding-top: 80px;"> <!-- Space for sidebar and adjust top padding -->
             <!-- Display filtered cards here -->
             <div class="row"></div>
         </div>

@@ -26,8 +26,6 @@ async function getAllData() {
 
 
   async function displayData(limit = 5) {
-
-
       let html = `<div class="row">`;
 
       data.slice(0,limit).forEach(function(data) {
@@ -39,7 +37,7 @@ async function getAllData() {
                       <h5 class="card-title">${data.firstName} ${data.lastName}</h5>
                       <p class="card-text">${data.team}</p>
                       <p class="card-text">${data.sport}</p>
-                      <a href="./index5.html" class="btn btn-primary" onclick="passInfo('${data.firstName}','${data.lastName}','${data.sport}','${data.price}','${data.rating}','${data.team}', '${data.descriptions}')">More Info</a>
+                      <a href="./index5.html" class="btn btn-primary2" onclick="passInfo('${data.firstName}','${data.lastName}','${data.sport}','${data.price}','${data.rating}','${data.team}', '${data.descriptions}', '${data.picture}')">More Info</a>
                   </div>
               </div>
           `;
@@ -60,7 +58,11 @@ async function getAllData() {
         // Store and log the filtered sport data
         localStorage.setItem('sportData', JSON.stringify(sportData));
         console.log(sportData);
+        displayTeams(sportData);
+        localStorage.setItem('data', JSON.stringify(data)); 
+        displaySport(data);
 }
+
 
 async function getCategory(category) {
    
@@ -92,6 +94,7 @@ async function getCategory(category) {
       window.location.href = './index5.html';
   
   }
+
   
 
 
@@ -106,32 +109,26 @@ function loadCardData() {
   }
 }
 
-
 function buildTable2(cardData) {
-  console.log("Storing card data:", cardData);
-
-  let html = `
-     <main class="container">
-        <div class="row">
-            <div class="col-md-6">
+    let html = `
+        <main class="container">
+            <div class="row">
+                <div class="col-md-6 image-container">
+                    <img class="card-img-top" src="${cardData.picture}" alt="${cardData.firstName} ${cardData.lastName}">
+                </div>
+                <div class="col-md-6 card-info">
                 <h2 id="card-title">Card Information</h2>
-                <img class="card-img-top" src="${data.picture}" alt="${data.firstName} ${data.lastName}" style="width:100%; height: 385px;">
-                <p id="card-description"><strong>Name:</strong> ${cardData.firstName} ${cardData.lastName}</p>
-                <p id="card-description"><strong>Rating:</strong> ${cardData.rating}</p>
-                <p id="card-description"><strong>Price:</strong> $${cardData.price}</p>
-                <p id="card-description"><strong>Team:</strong> ${cardData.team}</p>
-                <p id="card-description"><strong>Sport:</strong> ${cardData.sport}</p>
-                <p id="card-description"><strong>Description:</strong> ${cardData.descriptions}</p>
-            </div>
-            <div class="col-md-6 text-end">
-                <div class="image-container${cardData.picture}">
+                    <p><strong>Name:</strong> ${cardData.firstName} ${cardData.lastName}</p>
+                    <p><strong>Rating:</strong> ${cardData.rating}</p>
+                    <p><strong>Price:</strong> $${cardData.price}</p>
+                    <p><strong>Team:</strong> ${cardData.team}</p>
+                    <p><strong>Sport:</strong> ${cardData.sport}</p>
+                    <p><strong>Description:</strong> ${cardData.descriptions}</p>
                 </div>
             </div>
-        </div>
-     </main>
-  `;
-  
-  document.getElementById("solo").innerHTML = html;
+        </main>
+    `;
+    document.getElementById("solo").innerHTML = html;
 }
 
 
