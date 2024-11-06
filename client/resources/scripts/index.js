@@ -1,8 +1,11 @@
 let data = []
-let sportData=[]
+let sportData = []
+let myAccount = []
 let url = "http://localhost:5156/api/data"
+let url2 = "http://localhost:5156/api/account"
  
 function handleOnLoad() {
+    logIn()
     loadData()
 }
  
@@ -12,8 +15,39 @@ async function loadData() {
     loadCardData()
 }
 
+async function logIn(){
+    try {
+        let response = await fetch(url2);
+        if (!response.ok) throw new Error('Network response was not ok');
+        myAccount = await response.json();
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+    }
+    console.log(myAccount);
+}
+
+async function checkLogin() {
+    const hasRedirected = sessionStorage.getItem('hasRedirected', 'false');
+    
+    if (hasRedirected !== 'true') {
+        if (myAccount.isLoggedin === 'T' && myAccount.isAdmin === 'F') {
+            sessionStorage.setItem('hasRedirected', 'true');
+            console.log("Redirecting to index6.html");
+            window.location.href = './index6.html';
+
+        } else if (myAccount.isLoggedin === 'T' && myAccount.isAdmin === 'T') {
+            sessionStorage.setItem('hasRedirected', 'true');
+            // window.location.href = './index7.html';
+            
+        } else {
+            sessionStorage.setItem('hasRedirected', 'true');
+            window.location.href = './index.html';
+        }
+    }
+}
+
+
 async function getAllData() {
-  
   try {
       let response = await fetch(url);
       if (!response.ok) throw new Error('Network response was not ok');
@@ -96,7 +130,6 @@ async function getCategory(category) {
   }
 
   
-
 
 function loadCardData() {
   const cardData = JSON.parse(localStorage.getItem('cardData'));

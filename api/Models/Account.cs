@@ -17,6 +17,7 @@ namespace api.Models
         public string State { get; set; }
         public string Zip { get; set; }
         public string IsAdmin { get; set; }
+        public string IsLoggedin { get; set; }
       
  
     }

@@ -1,11 +1,13 @@
 
-let url = "http://localhost:5156/api/Data"
+let url = "http://localhost:5156/api/account"
 
 
 
 
 async function handleAddAccount(){
     let newAccount = {
+        IsAdmin: "F",
+        IsLoggedin: "T",
         Fname: document.getElementById("inputFName").value,
         Lname: document.getElementById("inputLName").value,
         Email: document.getElementById("inputEmail").value,
@@ -26,4 +28,7 @@ async function handleAddAccount(){
           "Content-type": "application/json; charset=UTF-8"
         }
       });
+
+      window.location.href = './index6.html';
 }
+

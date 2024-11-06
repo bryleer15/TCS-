@@ -149,27 +149,96 @@ namespace api.DataBase
     }
 
 
+
+// ----------------------------------------------------------ACCOUNTS-----------------------------------------------------------------------------
+
+
+
+private async Task<List<Account>> SelectAccount(string sql, List<MySqlParameter> parms){
+    List<Account> myAccount = new();
+    using var connection = new MySqlConnection(cs);
+    await connection.OpenAsync();
+    using var command = new MySqlCommand(sql, connection);
+ 
+    if (parms != null)
+    {
+        command.Parameters.AddRange(parms.ToArray());
+    }
+ 
+    using var reader = await command.ExecuteReaderAsync();
+    while (await reader.ReadAsync())
+    {
+ 
+        myAccount.Add(new Account()
+        {
+            AccountID = reader.GetInt32(0),
+            Email = reader.GetString(1),
+            Password = reader.GetString(2),
+            FName = reader.GetString(3),
+            LName = reader.GetString(4),
+            Address = reader.GetString(5),
+            City = reader.GetString(6),
+            State = reader.GetString(7),
+            Zip = reader.GetString(8),
+            IsAdmin = reader.GetString(9),
+            IsLoggedin = reader.GetString(10)
+        });
+    }
+ 
+    return myAccount;
+}
+
+
+ private async Task AccountNoReturnSql(string sql, List<MySqlParameter> parms){
+             List<Account> myAccount = new();
+             using var connection = new MySqlConnection(cs);
+             await connection.OpenAsync();
+             using var command = new MySqlCommand(sql, connection);
+           
+             if(parms != null){
+                command.Parameters.AddRange(parms.ToArray());
+             }
+             await command.ExecuteNonQueryAsync();
+    
+        }
+
+    // public async Task<List<Account>> GetAdminAccount()
+    //     {
+    //          string sql = "SELECT * FROM ACCOUNTS WHERE isadmin = 'T' ";
+    //          List<MySqlParameter> parms = new();
+
+    //          return await SelectAccount(sql, parms);
+    //     }
+
     public async Task InsertAccount(Account myAccount){
 
-    string sql = @$"INSERT INTO ACCOUNT
-            (email, pass_word, fname, lname, address, city, state, zip_code, isAdmin)
-            VALUES ( @email, @password, @fname, @lname, @address, @city, @state, @zip, @isAdmin);";
+    string sql = @$"INSERT INTO ACCOUNTS
+            (email, pass_word, fname, lname, address, city, state, zip_code, isAdmin, isLoggedin)
+            VALUES ( @email, @password, @fname, @lname, @address, @city, @state, @zip, @isAdmin, @isLoggedin);";
  
     List<MySqlParameter> parms = new(){
         new MySqlParameter("@email", MySqlDbType.String) { Value = myAccount.Email },
-        new MySqlParameter("@pass_word", MySqlDbType.String) { Value = myAccount.Password },
+        new MySqlParameter("@password", MySqlDbType.String) { Value = myAccount.Password },
         new MySqlParameter("@fname", MySqlDbType.String) { Value = myAccount.FName },
         new MySqlParameter("@lname", MySqlDbType.String) { Value = myAccount.LName },
         new MySqlParameter("@address", MySqlDbType.String) { Value = myAccount.Address },
         new MySqlParameter("@city", MySqlDbType.String) { Value = myAccount.City},
         new MySqlParameter("@state", MySqlDbType.String) { Value = myAccount.State },
-        new MySqlParameter("@zip_code", MySqlDbType.String) { Value = myAccount.Zip },
-        new MySqlParameter("@idAdmin", MySqlDbType.String) { Value = "F" }
+        new MySqlParameter("@zip", MySqlDbType.String) { Value = myAccount.Zip },
+        new MySqlParameter("@isAdmin", MySqlDbType.String) { Value = "F" },
+        new MySqlParameter("@isLoggedin", MySqlDbType.String) { Value = "T" }
 
     };
  
-    await DataNoReturnSql(sql, parms);  
+    await AccountNoReturnSql(sql, parms);  
 }
+
+    public async Task<List<Account>> GetLoggedIn()
+        {
+             string sql = "SELECT * FROM ACCOUNTS WHERE isLoggedin = 'T' ";
+             List<MySqlParameter> parms = new();
+             return await SelectAccount(sql, parms);
+        }
 
 
 
