@@ -1,12 +1,14 @@
 let data = []
 let sportData = []
-let myAccount = []
+let myAccount
+let hasRedirected = 'false';
 let url = "http://localhost:5156/api/data"
 let url2 = "http://localhost:5156/api/account"
  
-function handleOnLoad() {
-    logIn()
-    loadData()
+async function handleOnLoad() {
+   await logIn()
+ loadData();
+
 }
  
 async function loadData() {
@@ -24,27 +26,34 @@ async function logIn(){
         console.error('There was a problem with the fetch operation:', error);
     }
     console.log(myAccount);
+    checkLogin(myAccount);
 }
 
-async function checkLogin() {
-    const hasRedirected = sessionStorage.getItem('hasRedirected', 'false');
-    
-    if (hasRedirected !== 'true') {
-        if (myAccount.isLoggedin === 'T' && myAccount.isAdmin === 'F') {
-            sessionStorage.setItem('hasRedirected', 'true');
-            console.log("Redirecting to index6.html");
-            window.location.href = './index6.html';
+async function checkLogin(myAccount) {
+   
+    console.log('hasRedirected', hasRedirected);  // Log current state
 
-        } else if (myAccount.isLoggedin === 'T' && myAccount.isAdmin === 'T') {
-            sessionStorage.setItem('hasRedirected', 'true');
-            // window.location.href = './index7.html';
-            
+    // Redirect only if not already redirected
+    if (hasRedirected !== 'true') {
+        console.log('Checking login status...');
+        console.log('myAccount:', myAccount);
+
+        // Check myAccount properties
+        if (myAccount.isLoggedin === 'T') {
+            console.log('Redirecting to index6.html');
+            hasRedirected='true'
+            window.location.href = './index6.html';
         } else {
-            sessionStorage.setItem('hasRedirected', 'true');
+            console.log('Redirecting to index.html');
+            hasRedirected='true'
             window.location.href = './index.html';
         }
+    } else {
+        console.log('Already redirected, no action needed');
     }
+    
 }
+
 
 
 async function getAllData() {
