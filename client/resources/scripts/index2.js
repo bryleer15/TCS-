@@ -131,7 +131,7 @@ async function getTabSport(sport) {
     localStorage.setItem('sportData', JSON.stringify(sportData));
 }
 
-async function getTabTeam(team) {
+async function getTabTeam(team, sport) {
     await getAllData();
 
     let teamData = data.filter(item => item.team === team);

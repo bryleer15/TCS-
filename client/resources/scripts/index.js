@@ -1,57 +1,61 @@
-let data = []
-let sportData = []
-let myAccount
-let hasRedirected = 'false';
-let url = "http://localhost:5156/api/data"
-let url2 = "http://localhost:5156/api/account"
+let data = [];
+let sportData = [];
+let myAccount = [];
+let account = null;
+let url = "http://localhost:5156/api/data";
+let url2 = "http://localhost:5156/api/account";
+ 
+// Retrieve redirection status from localStorage
+let hasRedirected = localStorage.getItem('hasRedirected') || 'false';
  
 async function handleOnLoad() {
-   await logIn()
- loadData();
-
+    localStorage.setItem('hasRedirected', 'false');
+    await logIn(); // Ensure login is complete
+    await loadData(); // Ensure data is loaded before checking login
+ 
+    // If myAccount has data, pass the first account object to checkLogin
+    
+        account = myAccount[0];
+        checkLogin(account); // Only pass the relevant account object
+    
 }
  
 async function loadData() {
-    await getAllData()
-    displayData()   
-    loadCardData()
+    await getAllData();
+    displayData();
+    loadCardData();
 }
-
-async function logIn(){
-    try {
-        let response = await fetch(url2);
-        if (!response.ok) throw new Error('Network response was not ok');
+ 
+async function logIn() {
+    let response = await fetch(url2);
+    if (response.status === 200) {
         myAccount = await response.json();
-    } catch (error) {
-        console.error('There was a problem with the fetch operation:', error);
+        account = myAccount[0]; // Store the first account in account variable
     }
-    console.log(myAccount);
-    checkLogin(myAccount);
+    console.log(account);
 }
-
-async function checkLogin(myAccount) {
-   
-    console.log('hasRedirected', hasRedirected);  // Log current state
-
-    // Redirect only if not already redirected
-    if (hasRedirected !== 'true') {
-        console.log('Checking login status...');
-        console.log('myAccount:', myAccount);
-
-        // Check myAccount properties
-        if (myAccount.isLoggedin === 'T') {
-            console.log('Redirecting to index6.html');
-            hasRedirected='true'
-            window.location.href = './index6.html';
-        } else {
-            console.log('Redirecting to index.html');
-            hasRedirected='true'
-            window.location.href = './index.html';
-        }
-    } else {
-        console.log('Already redirected, no action needed');
+ 
+async function checkLogin(account) {
+    console.log(hasRedirected)
+    // Avoid re-running if redirection is already handled
+    if (!account || hasRedirected === 'true') {
+        console.log("Redirection already handled or account data is missing.");
+        return;
     }
-    
+ 
+    console.log("Checking login status...");
+    console.log("Account:", account);
+ 
+    // Redirect based on login status
+    if (account.isLoggedin === 'T') {
+        console.log("Redirecting to index6.html");
+        localStorage.setItem('hasRedirected', 'true'); // Store redirection flag in localStorage
+        window.location.href = './index6.html';
+    } else {
+        console.log("Redirecting to index.html");
+        localStorage.setItem('hasRedirected', 'true'); // Store redirection flag in localStorage
+        window.location.href = './index.html';
+    }
 }
 
 

@@ -235,8 +235,8 @@ private async Task<List<Account>> SelectAccount(string sql, List<MySqlParameter>
 
     public async Task<List<Account>> GetLoggedIn()
         {
-             string sql = "SELECT * FROM ACCOUNTS WHERE isLoggedin = 'T' ";
-             List<MySqlParameter> parms = new();
+             string sql = $"SELECT * FROM ACCOUNTS WHERE isLoggedin = 'T';";
+              List<MySqlParameter> parms = new();
              return await SelectAccount(sql, parms);
         }
 

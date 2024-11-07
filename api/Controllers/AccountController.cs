@@ -19,10 +19,11 @@ namespace MyApp.Namespace
     // GET: api/Account
 
     [HttpGet]
-    public async Task<List<Account>> Get(){
-        Database myDatabase = new();
-        return await myDatabase.GetLoggedIn();
-    }
+        public async Task<List<Account>> Get()
+        {
+            Database myDatabase = new();
+            return await myDatabase.GetLoggedIn();
+        }
 
 
 
