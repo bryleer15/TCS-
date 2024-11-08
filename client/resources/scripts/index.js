@@ -102,14 +102,13 @@ async function getAllData() {
         // Store and log the filtered sport data
         localStorage.setItem('sportData', JSON.stringify(sportData));
         console.log(sportData);
-        displayTeams(sportData);
+        displayTeamsOnNewPage(sportData);
         localStorage.setItem('data', JSON.stringify(data)); 
         displaySport(data);
 }
 
 
 async function getCategory(category) {
-   
 
     await getAllData();
 

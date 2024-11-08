@@ -14,14 +14,17 @@ h1 {
     color: #790101;
     position: relative;
     display: flex;
+    height: 350px;
     justify-content: center; /* Centers text horizontally */
-    align-items: center;     /* Centers text vertically */
+    align-items:end;     /* Centers text vertically */
     text-align: center;
     border: 5px double #c5bcbc;
     border-radius: 20px;
-    background-image: url("https://i.pinimg.com/474x/52/be/1e/52be1e96b6671384c44e043165078581.jpg");
-    background-size: contain;  /* Ensure image covers the entire background */
-    background-position: center; /* Center the background image */
+    background-color: #c5bcbc;
+    background-image: url("https://cdn.dribbble.com/users/1172342/screenshots/4030138/media/a279074132d6cb963efae82c1d18f4e3.jpg?resize=800x600&vertical=center"), url("https://cdn.dribbble.com/users/1172342/screenshots/2996754/1992-usa-dream-team.jpg?resize=800x600&vertical=center"), url("https://cdn.dribbble.com/users/1172342/screenshots/3833752/media/f5ccb4f5451cfa3af0b68f691112040d.jpg?resize=800x600&vertical=center");
+    background-size: contain, contain, contain; 
+    background-position: left, center, right; 
+    background-repeat: no-repeat, no-repeat, no-repeat;
     padding: 50px;
 }
 
