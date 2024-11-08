@@ -62,19 +62,22 @@ async function displaySport(dataKey) {
     }
 }
 
-function displayTeamsOnNewPage() {
-    const storedSportData = JSON.parse(localStorage.getItem('data'));
+function displayTeamsOnNewPage(selectedSport) {
+    
+    const storedSportData = JSON.parse(localStorage.getItem('sportData'));
 
     if (!storedSportData) {
         console.error("No sport data found.");
         return;
     }
 
-    let teams = [...new Set(storedSportData.map(item => item.team))];
+   
+    let teams = [...new Set(storedSportData.map(item => item.team))];  
     let teamsList = document.getElementById("teams");
 
-    teamsList.innerHTML = ""; // Clear any existing items
+    teamsList.innerHTML = "";  
 
+    
     teams.forEach(team => {
         let li = document.createElement("li");
         li.className = "list-group-item";
@@ -82,7 +85,7 @@ function displayTeamsOnNewPage() {
         let button = document.createElement("button");
         button.className = "btn btn-link text-decoration-none";
         button.textContent = team;
-        button.onclick = () => handleTeamClick(team);
+        button.onclick = () => handleTeamClick(team, selectedSport);  
 
         li.appendChild(button);
         teamsList.appendChild(li);
@@ -116,24 +119,29 @@ function displaySportsOnNewPage() {
     });
 }
 
-function handleTeamClick(team) {
-    getTabTeam(team).then(() => displaySport('teamData'));
+function handleTeamClick(team, sport) {
+    getTabTeam(team, sport).then(() => displaySport('teamData'));  
 }
 
 function handleSportClick(sport) {
-    getTabSport(sport).then(() => displaySport('sportData'));
+    console.log(`Sport clicked: ${sport}`);  // Debug log
+    getTabSport(sport).then(() => {
+       displaySport('sportData');  
+       displayTeamsOnNewPage(sport)
+    });
 }
 
-async function getTabSport(sport) {
-    await getAllData();
 
-    sportData = data.filter(item => item.sport === sport);
-    localStorage.setItem('sportData', JSON.stringify(sportData));
+async function getTabSport(sport) {
+    await getAllData();  
+
+    sportData = data.filter(item => item.sport === sport);  
+    localStorage.setItem('sportData', JSON.stringify(sportData));  
 }
 
 async function getTabTeam(team, sport) {
-    await getAllData();
+    await getTabSport(sport);  
 
-    let teamData = data.filter(item => item.team === team);
-    localStorage.setItem('teamData', JSON.stringify(teamData));
+    let teamData = data.filter(item => item.team === team);  
+    localStorage.setItem('teamData', JSON.stringify(teamData)); 
 }

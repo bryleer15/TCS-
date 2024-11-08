@@ -1,7 +1,7 @@
 body{
   font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     display: block;
-    background-color: #fff;
+    background-color: #efecec;
 }
 
 p{
@@ -9,38 +9,38 @@ p{
     font-style: oblique;
     padding: 0px;
     margin: 0px;
-    color: black;
+    color: #413939;
 }
-
-
-
 
 h1 {
   font-size: 90px;
   font-weight: 900;
   color: #790101;
   position: relative;
+  height: 300px;
   display: flex;
   justify-content: center; /* Centers text horizontally */
-  align-items: center;     /* Centers text vertically */
-  text-align: center;
-  border: 5px double #790101;
+  align-items:end;     /* Centers text vertically */
+  text-align:center;
+  border: 5px solid #c5bcbc;
   border-radius: 20px;
-  background-image: url("https://i.pinimg.com/474x/52/be/1e/52be1e96b6671384c44e043165078581.jpg");
-  background-size:contain;  /* Ensure image covers the entire background */
-  background-position: center; /* Center the background image */
+  background-color: #000000;
+  background-image: url("https://i.pinimg.com/originals/7d/6b/cf/7d6bcf775a8c726f11086315e46d2735.gif"), url("https://cdn.dribbble.com/users/1172342/screenshots/3313408/miahamm.gif"), url("https://www.icegif.com/wp-content/uploads/2024/02/icegif-644.gif");
+  background-size: contain, contain, contain; 
+  background-position: left, right, center; 
+  background-repeat: no-repeat, no-repeat, no-repeat;
   padding: 50px;
 }
 
 h2 {
     display: block;
     font-style: oblique;
-    color: black;
+    color: #413939;
 
 }
 
 hr {
-  border-top: 2px solid rgb(0, 0, 0); /* Dark red color */
+  border-top: 2px solid #413939(0, 0, 0); /* Dark red color */
   margin: 20px 0; /* Add space above and below the line */
   width: 80%; /* Line width as a percentage of its container */
   margin-left: auto;
@@ -54,7 +54,7 @@ h3 {
   display: flexbox;
   text-align: center;
   padding: 50px;
-  color: black;
+  color: #413939;
 }
 
 h4 {
@@ -63,7 +63,7 @@ h4 {
   display: flexbox;
   text-align: center;
   padding: 50px;
-  color:#000000;
+  color:#413939;
 }
 
 
@@ -74,42 +74,37 @@ h4 {
     text-align: center;
   }
   
-  /* Keep the same style for the columns */
   .column {
-    flex: 1; /* Each column takes up equal space */
-    max-width: 24%; /* Limit the width of each column */
+    width: 15%;
+    margin: 20px 10px;
     text-align: center;
-    border: 8px solid;
-    border-color: #790101;
-    background-color: #ffffff;
-    border-style: solid;
-    border-radius: 20px;
-    margin-left: 10px;
-    margin-right: 10px;
-    color: #000000;
-    padding: 0%;
+    background-color: #c5bcbc;
+    border-radius: 10px;
+    border-color: 10px solid #691616;
+    box-shadow: 0 4px 10px #413939(0, 0, 0, 0.1);
+    padding: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
-  /* Style the images inside the grid */
+  .column:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px #413939(0, 0, 0, 0.2);
+  }
+  
   .column img {
-    width: 30%; /* Ensure images take up the full width of the column */
-    opacity: 0.8;
-    cursor: pointer;
-    text-align: center;
-    padding: 0px;
-    margin-left: 0px; /* Tighter margin on the left */
-    margin-right: 0px;
+    width: 70%;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    transition: opacity 0.3s ease;
   }
   
   .column img:hover {
     opacity: 1;
   }
   
-  /* Expanding image container */
-  .container {
-    position: relative;
-    display: none;
-    padding: 0%;
+  .column p {
+    font-size: 16px;
+    color: #333;
   }
  
   
@@ -128,7 +123,7 @@ h4 {
 .card {
   border: 8px solid #790101; 
   border-radius: 10px; /* Rounded corners */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+  box-shadow: 0px 4px 8px #413939(0, 0, 0, 0.1); /* Subtle shadow effect */
   transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hover effect transition */
   background-color: #fff; /* White background */
   overflow: hidden;
@@ -138,7 +133,7 @@ h4 {
 /* Hover effect on cards */
 .card:hover {
   transform: translateY(-5px); /* Slight lift on hover */
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+  box-shadow: 0px 8px 16px #413939(0, 0, 0, 0.2); /* Stronger shadow on hover */
 }
 
 /* Styling the image inside the card */
@@ -146,7 +141,7 @@ h4 {
   width: 100%;
   height: 300px; /* Fixed height for images */
   object-fit: cover; /* Ensures image fits without distortion */
-  border: 2px solid #000000; /* Add border below the image */
+  border: 2px solid #413939; /* Add border below the image */
   border-radius: 1px;
 }
 
@@ -167,7 +162,7 @@ h4 {
 /* Card text styling */
 .card-text {
   font-size: 1rem;
-  color: #000000;
+  color: #413939;
   margin-bottom: 10px;
 }
 
@@ -175,7 +170,7 @@ h4 {
 .btn {
   background-color: #790101;
   border: none;
-  color: #000000;
+  color: #413939;
   padding: 10px 15px;
   font-size: 1rem;
   cursor: pointer;
@@ -216,8 +211,8 @@ form {
   max-width: auto;
   margin: 0 auto;
   padding: 20px;
-  color:#000000;
-  background-color: white;
+  color:#413939;
+  background-color: #efecec;
 
 }
 /* Form labels */
@@ -226,7 +221,7 @@ label {
   font-weight: bold;
   margin-bottom: 5px;
   display: block;
-  color: #000000;
+  color: #413939;
 }
 
 /* Input fields */
@@ -235,10 +230,10 @@ input[type="password"] {
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
-  border: 1px solid #000000 !important;
+  border: 1px solid #413939 !important;
   border-radius: 5px;
   font-size: 14px;
-  background-color: #790101;
+  background-color: #c5bcbc;
   box-sizing: border-box;
 }
 
@@ -249,19 +244,19 @@ input[type="password"] {
   top: 0;
   left: 0;
   width: 280px;
-  border-right: 15px double #000000;
+  border-right: 15px double #413939;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  background-color: #790101;
+  background-color: #c5bcbc;
 }
 
 .baseball-title {
   font-size: 50px;
-  color: #000;
+  color: #413939;
 }
 
 .flex-shrink-0 a {
   font-size: 18px;
-  color: #000000;
+  color: #413939;
   font-weight: bold;
 }
 
@@ -308,11 +303,29 @@ input[type="password"] {
 .flex-shrink-0 a,
 .flex-shrink-0 .btn-toggle-nav a {
     font-size: 18px;
-    color: #000000 !important; /* Ensure black font color */
+    color: #413939 !important; /* Ensure black font color */
     font-weight: bold;
     text-decoration: none;
 }
 
 .btn-primary2{
-  color: #fff;
+  color: #efecec;
+}
+
+/* Style for logo link */
+.navbar-logo {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center;     /* Center vertically */
+  padding: 20px;  /* Optional padding around the logo */
+  width: 100%; /* Ensures the link takes the full width of its container */
+  margin-top: -15px;
+}
+
+/* Style for the logo image */
+.logo {
+  width: 100px;  /* Adjust width to make it smaller */
+  max-height: 100px; /* Limits height to keep it proportional */
+  object-fit: contain; /* Ensures logo fits within bounds without distortion */
+  margin-top: -15px;
 }

@@ -9,12 +9,9 @@ let url2 = "http://localhost:5156/api/account";
 let hasRedirected = localStorage.getItem('hasRedirected') || 'false';
  
 async function handleOnLoad() {
-    localStorage.setItem('hasRedirected', 'false');
-    await logIn(); // Ensure login is complete
-    await loadData(); // Ensure data is loaded before checking login
- 
-    // If myAccount has data, pass the first account object to checkLogin
-    
+    // localStorage.setItem('hasRedirected', 'false');
+    // await logIn();
+    await loadData(); 
         account = myAccount[0];
         checkLogin(account); // Only pass the relevant account object
     
@@ -26,37 +23,37 @@ async function loadData() {
     loadCardData();
 }
  
-async function logIn() {
-    let response = await fetch(url2);
-    if (response.status === 200) {
-        myAccount = await response.json();
-        account = myAccount[0]; // Store the first account in account variable
-    }
-    console.log(account);
-}
+// async function logIn() {
+//     let response = await fetch(url2);
+//     if (response.status === 200) {
+//         myAccount = await response.json();
+//         account = myAccount[0]; // Store the first account in account variable
+//     }
+//     console.log(account);
+// }
  
-async function checkLogin(account) {
-    console.log(hasRedirected)
-    // Avoid re-running if redirection is already handled
-    if (!account || hasRedirected === 'true') {
-        console.log("Redirection already handled or account data is missing.");
-        return;
-    }
+// async function checkLogin(account) {
+//     console.log(hasRedirected)
+//     // Avoid re-running if redirection is already handled
+//     if (!account || hasRedirected === 'true') {
+//         console.log("Redirection already handled or account data is missing.");
+//         return;
+//     }
  
-    console.log("Checking login status...");
-    console.log("Account:", account);
+//     console.log("Checking login status...");
+//     console.log("Account:", account);
  
-    // Redirect based on login status
-    if (account.isLoggedin === 'T') {
-        console.log("Redirecting to index6.html");
-        localStorage.setItem('hasRedirected', 'true'); // Store redirection flag in localStorage
-        window.location.href = './index6.html';
-    } else {
-        console.log("Redirecting to index.html");
-        localStorage.setItem('hasRedirected', 'true'); // Store redirection flag in localStorage
-        window.location.href = './index.html';
-    }
-}
+//     // Redirect based on login status
+//     if (account.isLoggedin === 'T') {
+//         console.log("Redirecting to index6.html");
+//         localStorage.setItem('hasRedirected', 'true'); // Store redirection flag in localStorage
+//         window.location.href = './index6.html';
+//     } else {
+//         console.log("Redirecting to index.html");
+//         localStorage.setItem('hasRedirected', 'true'); // Store redirection flag in localStorage
+//         window.location.href = './index.html';
+//     }
+// }
 
 
 

@@ -1,18 +1,17 @@
 /* General body style */
 body {
     font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-weight: lighter;
-    background-color: #790101; /* Light background */
+    background-color: #efecec; /* Light background */
     padding: 10px;
 
 }
 
 /* Custom form style */
 .custom-form {
-    background-color: #f6dbdb; /* White background for form */
+    background-color: #efecec; /* White background for form */
     border: 1px solid #790101;
     border-radius: 20px;
-    box-shadow: 0px 0px 10px rgba(59, 54, 54, 0.856);
+    box-shadow: 0px 0px 10px #413939(59, 54, 54, 0.856);
     padding: 10px;
 }
 
@@ -41,12 +40,12 @@ body {
 
 .btn-primary:hover {
     background-color: #790101; /* Darker on hover */
-    border-color: #aa0606;
+    border-color: #790101;
 }
 
 /* Title style */
 h4 {
-    color: #aa0606;
+    color: #efecec;
     margin-bottom: 20px;
     font-size: 30px;
     border-radius: 20px; /* Rounded corners */
@@ -54,21 +53,34 @@ h4 {
 
 /* Custom styles for the card */
 .card {
-    background-color: #e5e2e2; /* Light background */
-    border-radius: 20px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
-    border: 1px solid #790101;
+    background-color: #790101; 
+    border-radius: 20px; 
 }
 
 .card-header {
-    background-color: #000000; 
+    background-color: #790101; 
     padding: 10px;
-    border-radius: 20px; /* Rounded corners */
+    border-radius: 20px !important; /* Rounded corners */
 }
 
 .card-body {
     padding: 30px;
-    border-radius: 20px; /* Rounded corners */
-
+    border-radius: 20px !important; /* Rounded corners */
 }
 
+.navbar-logo {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
+    padding: 20px;  /* Optional padding around the logo */
+    width: 100%; /* Ensures the link takes the full width of its container */
+    margin-top: -15px;
+  }
+  
+  /* Style for the logo image */
+  .logo {
+    width: 100px;  /* Adjust width to make it smaller */
+    max-height: 100px; /* Limits height to keep it proportional */
+    object-fit: contain; /* Ensures logo fits within bounds without distortion */
+    margin-top: -15px;
+  }

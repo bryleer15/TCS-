@@ -1,11 +1,10 @@
 /* General body styling */
 body {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    background-color: #f8f9fa;
+    background-color: #efecec;
     margin: 0;
     padding: 0;
     height: 100vh;
-    font-weight: lighter;
 }
 
 h1 {
@@ -14,14 +13,17 @@ h1 {
     color: #790101;
     position: relative;
     display: flex;
+    height: 350px;
     justify-content: center; /* Centers text horizontally */
-    align-items: center;     /* Centers text vertically */
+    align-items:end;     /* Centers text vertically */
     text-align: center;
-    border: 5px double #790101;
+    border: 5px double #c5bcbc;
     border-radius: 20px;
-    background-image: url("https://i.pinimg.com/474x/52/be/1e/52be1e96b6671384c44e043165078581.jpg");
-    background-size: contain;  /* Ensure image covers the entire background */
-    background-position: center; /* Center the background image */
+    background-color: #c5bcbc;
+    background-image: url("https://cdn.dribbble.com/users/1172342/screenshots/4030138/media/a279074132d6cb963efae82c1d18f4e3.jpg?resize=800x600&vertical=center"), url("https://cdn.dribbble.com/users/1172342/screenshots/2996754/1992-usa-dream-team.jpg?resize=800x600&vertical=center"), url("https://cdn.dribbble.com/users/1172342/screenshots/3833752/media/f5ccb4f5451cfa3af0b68f691112040d.jpg?resize=800x600&vertical=center");
+    background-size: contain, contain, contain; 
+    background-position: left, center, right; 
+    background-repeat: no-repeat, no-repeat, no-repeat;
     padding: 50px;
 }
 
@@ -32,19 +34,21 @@ h1 {
     top: 0;
     left: 0;
     width: 280px;
-    border-right: 15px double #000000;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    background-color: #790101;
+    color: #7a6767 !important;
+    border-right: 15px double #413939;
+    box-shadow: 2px 0 5px #413939(0, 0, 0, 0.1);
+    background-color: #c5bcbc;
+    overflow-y: auto; /* Enable vertical scrolling */
 }
 
 .baseball-title {
     font-size: 50px;
-    color: #000;
+    color: #413939 !important;
 }
 
 .flex-shrink-0 a {
     font-size: 18px;
-    color: #000000;
+    color: #413939 !important;
     font-weight: bold;
 }
 
@@ -56,7 +60,7 @@ h1 {
     width: 100%;
     font-size: 16px;
     font-weight: bold;
-    background-color: #f8f9fa;
+    background-color: #ffffff;
     border: none;
     text-align: left;
     padding: 10px;
@@ -68,13 +72,13 @@ h1 {
 }
 
 .flex-shrink-0 .collapse.show {
-    background-color: #cc7070;
+    /* background-color: #cc7070; */
     border-radius: 5px;
 }
 
 .flex-shrink-0 .btn-toggle-nav a {
     padding-left: 20px;
-    color: #000000;
+    color: #413939 !important;
     text-decoration: none;
 }
 
@@ -106,9 +110,9 @@ h1 {
 .card {
     border: 8px solid #790101; /* Border color */
     border-radius: 10px; /* Rounded corners */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+    box-shadow: 0px 4px 8px #413939; /* Subtle shadow effect */
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hover effect transition */
-    background-color: #fff; /* White background */
+    background-color: #c5bcbc; /* White background */
     overflow: hidden;
     height: 450px; /* Height of the entire card */
     display: flex;
@@ -120,7 +124,7 @@ h1 {
     width: 100%;
     height: 300px; /* Fixed height for images */
     object-fit: cover; /* Ensures image fits without distortion */
-    border: 2px solid #000000; /* Add border below the image */
+    border: 2px solid #413939; /* Add border below the image */
 }
 
 /* Styling the card body */
@@ -132,7 +136,7 @@ h1 {
 /* Card text styling */
 .card-text {
     font-size: 0.9rem;
-    color: #000;
+    color: #413939;
     margin-bottom: 1px;
 }
 
@@ -145,7 +149,7 @@ h1 {
     width: 15rem;
     border: 8px solid #790101;
     border-radius: 15px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 8px #413939;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     background-color: #fff;
     overflow: hidden;
@@ -174,7 +178,7 @@ h1 {
 
 .flip-card-back {
     background-color: #790101;
-    color: white;
+    color: #c5bcbc;
     transform: rotateY(180deg);
     display: flex;
     padding: 5px;
@@ -199,3 +203,134 @@ h1 {
     background-color: #7a6767; /* Darker on hover */
     border-color: #ad9999;
 }
+
+/* Style the sports list items */
+#sports, #teams {
+    padding: 0;
+    list-style: none;  /* Remove bullet points */
+    max-width: 200px;  /* Narrower width for a slimmer appearance */
+    margin: 0 auto;  /* Center the list on the page */
+}
+
+/* Style for each list item */
+#sports .list-group-item, #teams .list-group-item {
+    padding: 8px 15px;  /* Reduce padding for a slimmer look */
+    margin-bottom: 8px; /* Smaller space between items */
+    background-color: #f4f4f4;
+    border: 1px solid #ccc; /* Lighter border */
+    border-radius: 6px; /* Slightly rounded corners */
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hover effect for the list items */
+#sports .list-group-item:hover, #teams .list-group-item:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.02); /* Slight zoom effect */
+}
+
+/* Style the buttons inside the list items */
+#sports .list-group-item .btn, #teams .list-group-item .btn {
+    font-size: 1rem;  /* Smaller font size */
+    font-weight: bold;
+    color: #413939;
+    background-color: transparent;
+    border: none;
+    padding: 4px 8px; /* Thinner padding */
+    text-align: left;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+/* Hover effect for the buttons */
+#sports .list-group-item .btn:hover, #teams .list-group-item .btn:hover {
+    color: #fff;
+    background-color: #9f3535;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+/* Focus state for accessibility */
+#sports .list-group-item .btn:focus, #teams .list-group-item .btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(159, 53, 53, 0.4);  /* Thinner focus ring */
+}
+
+/* Styling for active button when clicked */
+#sports .list-group-item .btn.active, #teams .list-group-item .btn.active {
+    color: #fff;
+    background-color: #790101; /* Darker red for active state */
+    border-radius: 3px;
+}
+
+/* Style the teams list items */
+#teams {
+    padding: 0;
+    list-style: none;  /* Remove bullet points */
+    max-width: 200px;  /* Slimmer width */
+    margin: 0 auto;  /* Center the list on the page */
+}
+
+/* Style for each list item */
+#teams .list-group-item {
+    padding: 10px 15px;  /* Reduced padding */
+    margin-bottom: 8px; /* Smaller space between items */
+    background-color: #f4f4f4;
+    border: 1px solid #ccc; /* Lighter border */
+    border-radius: 6px; /* Slightly rounded corners */
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hover effect for the list items */
+#teams .list-group-item:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.02); /* Slight zoom effect */
+}
+
+/* Style the buttons inside the list items */
+#teams .list-group-item .btn {
+    font-size: 1rem;  /* Smaller font size */
+    font-weight: bold;
+    color: #413939;
+    background-color: transparent;
+    border: none;
+    padding: 3px 8px; /* Slimmer padding */
+    text-align: left;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+/* Hover effect for the buttons */
+#teams .list-group-item .btn:hover {
+    color: #fff;
+    background-color: #9f3535;
+    border-radius: 3px; /* Slightly smaller radius */
+    cursor: pointer;
+}
+
+/* Focus state for accessibility */
+#teams .list-group-item .btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(159, 53, 53, 0.4);  /* Thinner focus ring */
+}
+
+/* Styling for active button when clicked */
+#teams .list-group-item .btn.active {
+    color: #fff;
+    background-color: #790101; /* Darker red for active state */
+    border-radius: 3px;
+}
+
+.navbar-logo {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
+    padding: 20px;  /* Optional padding around the logo */
+    width: 100%; /* Ensures the link takes the full width of its container */
+    margin-top: -15px;
+  }
+  
+  /* Style for the logo image */
+  .logo {
+    width: 100px;  /* Adjust width to make it smaller */
+    max-height: 100px; /* Limits height to keep it proportional */
+    object-fit: contain; /* Ensures logo fits within bounds without distortion */
+    margin-top: -15px;
+  }

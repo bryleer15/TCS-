@@ -1,7 +1,7 @@
 /* General body styling */
 body {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    background-color: #f8f9fa;
+    background-color: #efecec;
     margin: 0;
     padding: 0;
     height: 100vh;
@@ -17,7 +17,7 @@ h1 {
     justify-content: center; /* Centers text horizontally */
     align-items: center;     /* Centers text vertically */
     text-align: center;
-    border: 5px double #790101;
+    border: 5px double #c5bcbc;
     border-radius: 20px;
     background-image: url("https://i.pinimg.com/474x/52/be/1e/52be1e96b6671384c44e043165078581.jpg");
     background-size: contain;  /* Ensure image covers the entire background */
@@ -32,25 +32,25 @@ h1 {
     top: 0;
     left: 0;
     width: 280px;
-    border-right: 15px double #000000;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    background-color: #790101;
+    border-right: 15px double #413939;
+    box-shadow: 2px 0 5px #7a6767;
+    background-color: #c5bcbc;
 }
 
 .baseball-title {
     font-size: 50px;
-    color: #000;
+    color: #413939;
 }
 
 .flex-shrink-0 a {
     font-size: 18px;
-    color: #000000;
+    color: #413939;
     font-weight: bold;
 }
 
 .flex-shrink-0 ul {
     padding-left: 0;
-    color: #000;
+    color: #413939;
 }
 
 .flex-shrink-0 .btn-toggle {
@@ -75,7 +75,7 @@ h1 {
 
 .flex-shrink-0 .btn-toggle-nav a {
     padding-left: 20px;
-    color: #000000;
+    color: #7a6767;
     text-decoration: none;
 }
 
@@ -96,7 +96,7 @@ h1 {
     max-width: 700px; /* Set a maximum width if desired */
     object-fit: cover;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 10px #7a6767;
     border: 3px solid #790101;
 }
 
@@ -124,8 +124,8 @@ h1 {
     max-width: 60%; /* Ensures info section takes up 60% of the row */
     padding-left: 20px; /* Adds space between the image and info */
     font-size: 25px;
-    color: #000;
-    border-left: 2px solid #000;
+    color: #7a6767;
+    border-left: 2px solid #7a6767;
 }
 
 
@@ -135,14 +135,14 @@ h1 {
     height: auto;
     object-fit: cover;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 10px #7a6767;
     border: 5px solid #790101;
 }
 
 .card-info {
     padding-left: 30px; /* Adds space between the image and information */
     font-size: 1rem;
-    color: #000000;
+    color: #7a6767;
 }
 
 #card-title {
@@ -154,5 +154,21 @@ h1 {
     padding-bottom: 20px;
 }
 
+.navbar-logo {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
+    padding: 20px;  /* Optional padding around the logo */
+    width: 100%; /* Ensures the link takes the full width of its container */
+    margin-top: -15px;
+  }
+  
+  /* Style for the logo image */
+  .logo {
+    width: 100px;  /* Adjust width to make it smaller */
+    max-height: 100px; /* Limits height to keep it proportional */
+    object-fit: contain; /* Ensures logo fits within bounds without distortion */
+    margin-top: -15px;
+  }
 
 

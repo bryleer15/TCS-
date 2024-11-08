@@ -1,7 +1,7 @@
 /* General body styling */
 body {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    background-color: #f8f9fa;
+    background-color: #efecec;
     margin: 0;
     padding: 0;
     height: 100vh;
@@ -16,7 +16,7 @@ h1 {
     justify-content: center; /* Centers text horizontally */
     align-items: center;     /* Centers text vertically */
     text-align: center;
-    border: 5px double #790101;
+    border: 5px double #c5bcbc;
     border-radius: 20px;
     background-image: url("https://i.pinimg.com/474x/52/be/1e/52be1e96b6671384c44e043165078581.jpg");
     background-size: contain;  /* Ensure image covers the entire background */
@@ -31,19 +31,21 @@ h1 {
     top: 0;
     left: 0;
     width: 280px;
-    border-right: 15px double #000000;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    background-color: #790101;
+    color: #7a6767 !important;
+    border-right: 15px double #413939;
+    box-shadow: 2px 0 5px #413939(0, 0, 0, 0.1);
+    background-color: #c5bcbc;
+    overflow-y: auto; /* Enable vertical scrolling */
 }
-.baseball-title{
-    font-size: 50px;
-    color: #000;
 
+.baseball-title {
+    font-size: 50px;
+    color: #413939 !important;
 }
 
 .flex-shrink-0 a {
     font-size: 18px;
-    color: #000000;
+    color: #413939 !important;
     font-weight: bold;
 }
 
@@ -67,13 +69,13 @@ h1 {
 }
 
 .flex-shrink-0 .collapse.show {
-    background-color: #a44545;
+    background-color: #cc7070;
     border-radius: 5px;
 }
 
 .flex-shrink-0 .btn-toggle-nav a {
     padding-left: 20px;
-    color: #000000;
+    color: #413939 !important;
     text-decoration: none;
 }
 
@@ -85,26 +87,29 @@ h1 {
 /* Main content styling */
 .main-content {
     margin-left: 300px; /* Space for the sidebar */
-    padding: 20px; /* Padding for the main content */
+    padding: 20px !important; /* Padding for the main content */
 }
+
 
 /* Container for cards */
 .row {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
+    justify-content: center !important; /* Centers cards horizontally */
+    align-items: center !important; /* Centers cards vertically */
+    gap: 15px; /* Spacing between cards */
     padding: 10px;
     margin: 0 auto;
+    max-width: 1200px; /* Optional: limit row width to better center on the page */
 }
 
 /* Styling individual cards */
 .card {
     border: 8px solid #790101; /* Border color */
     border-radius: 10px; /* Rounded corners */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+    box-shadow: 0px 4px 8px #413939; /* Subtle shadow effect */
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hover effect transition */
-    background-color: #fff; /* White background */
+    background-color: #c5bcbc; /* White background */
     overflow: hidden;
     height: 450px; /* Height of the entire card */
     display: flex;
@@ -116,19 +121,19 @@ h1 {
     width: 100%;
     height: 300px; /* Fixed height for images */
     object-fit: cover; /* Ensures image fits without distortion */
-    border: 2px solid #000000; /* Add border below the image */
+    border: 2px solid #413939; /* Add border below the image */
 }
 
 /* Styling the card body */
 .card-body {
-    padding: 10px; /* Add padding to card body */
+    padding: 5px; /* Add padding to card body */
     text-align: center;
 }
 
 /* Card text styling */
 .card-text {
     font-size: 0.9rem;
-    color: #000;
+    color: #413939;
     margin-bottom: 1px;
 }
 
@@ -136,12 +141,12 @@ h1 {
 .flip-card {
     background-color: transparent;
     height: 450px;
-    padding: 10px;
+    padding: 5px;
     perspective: 1000px;
     width: 15rem;
     border: 8px solid #790101;
     border-radius: 15px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 8px #413939;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     background-color: #fff;
     overflow: hidden;
@@ -170,10 +175,10 @@ h1 {
 
 .flip-card-back {
     background-color: #790101;
-    color: white;
+    color: #c5bcbc;
     transform: rotateY(180deg);
     display: flex;
-    padding: 10px;
+    padding: 5px;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -196,4 +201,19 @@ h1 {
     border-color: #ad9999;
 }
 
-/* Additional styles can go here */
+.navbar-logo {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
+    padding: 20px;  /* Optional padding around the logo */
+    width: 100%; /* Ensures the link takes the full width of its container */
+    margin-top: -15px;
+  }
+  
+  /* Style for the logo image */
+  .logo {
+    width: 100px;  /* Adjust width to make it smaller */
+    max-height: 100px; /* Limits height to keep it proportional */
+    object-fit: contain; /* Ensures logo fits within bounds without distortion */
+    margin-top: -15px;
+  }
