@@ -3,57 +3,151 @@ let sportData = [];
 let myAccount = [];
 let account = null;
 let url = "http://localhost:5156/api/data";
-let url2 = "http://localhost:5156/api/account";
+let url2 = "http://localhost:5156/api/account/";
  
-// Retrieve redirection status from localStorage
 let hasRedirected = localStorage.getItem('hasRedirected') || 'false';
+let myAccounts = [];
  
+
+
 async function handleOnLoad() {
-    // localStorage.setItem('hasRedirected', 'false');
-    // await logIn();
+    localStorage.setItem('hasRedirected', 'false');
+    await getAllAccounts();
+    await logIn();
     await loadData(); 
         account = myAccount[0];
-        checkLogin(account); // Only pass the relevant account object
+        console.log(account)
+        isDirected(account);
     
 }
  
+
+async function getAllAccounts() {
+    try {
+        let response = await fetch(url2);
+        if (!response.ok) throw new Error('Network response was not ok');
+        myAccounts = await response.json();
+        console.log(myAccounts)
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+    }
+  }
+
 async function loadData() {
     await getAllData();
     displayData();
     loadCardData();
 }
  
-// async function logIn() {
-//     let response = await fetch(url2);
-//     if (response.status === 200) {
-//         myAccount = await response.json();
-//         account = myAccount[0]; // Store the first account in account variable
-//     }
-//     console.log(account);
-// }
+async function logIn(accountID) {
+    
+    let response = await fetch(url2 + accountID, {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8"
+        }
+      });
+    if (response.status === 200) {
+        myAccount = await response.json();
+        account = myAccount[0]; 
+        console.log(myAccount)
+        console.log(account)
+    }
+    console.log(account);
+}
  
-// async function checkLogin(account) {
-//     console.log(hasRedirected)
-//     // Avoid re-running if redirection is already handled
-//     if (!account || hasRedirected === 'true') {
-//         console.log("Redirection already handled or account data is missing.");
-//         return;
-//     }
+async function isDirected(account) {
+    console.log(hasRedirected)
+    console.log(account)
+
+    if (!account || hasRedirected === 'true') {
+        console.log("Redirection already handled or account data is missing.");
+        return;
+
+    } else{
+        await checkLogin(account)
+    }
+
+}
+
+async function checkLogin(account) {
  
-//     console.log("Checking login status...");
-//     console.log("Account:", account);
+    console.log("Checking login status...");
+    console.log("Account:", account);
  
-//     // Redirect based on login status
-//     if (account.isLoggedin === 'T') {
-//         console.log("Redirecting to index6.html");
-//         localStorage.setItem('hasRedirected', 'true'); // Store redirection flag in localStorage
-//         window.location.href = './index6.html';
-//     } else {
-//         console.log("Redirecting to index.html");
-//         localStorage.setItem('hasRedirected', 'true'); // Store redirection flag in localStorage
-//         window.location.href = './index.html';
-//     }
-// }
+    if (account.isLoggedin === 'T') {
+        console.log("Redirecting to index6.html");
+        localStorage.setItem('hasRedirected', 'true'); 
+        window.location.href = './index6.html';
+    } else {
+        console.log("Redirecting to index.html");
+        localStorage.setItem('hasRedirected', 'true'); 
+        window.location.href = './index.html';
+    }
+}
+
+
+async function handleLogOut(){
+    await logIn()
+    console.log(account)
+    await logOut(account)
+}
+
+async function logOut(account){
+    console.log(account)
+    console.log(account.accountID)
+    await fetch(url2 + account.accountID, {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8"
+        }
+      });
+
+    hasRedirected = localStorage.getItem('hasRedirected') || 'false';
+    logIn()
+    await checkLogin(account)
+}
+
+async function signInHome() {
+   
+    const email = document.getElementById('inputEmail').value;
+    const password = document.getElementById('inputPassword').value;
+
+    const account = myAccounts.find(
+        (acc) => acc.email === email && acc.password === password
+      );
+
+      let newAccount = {
+        AccountID : account.accountID,
+        Email : account.email,
+        Password : account.password,
+        FName : account.fName,
+        LName :  account.lName,
+        Address : account.address,
+        City : account.city,
+        State : account.state,
+        Zip : account.zip,
+        IsAdmin : "F",
+        IsLoggedin : "T"
+    };
+
+      if (account) {
+        console.log('Login successful!');
+        await fetch(url2 + newAccount.AccountID, {
+    
+            method: "PUT",
+            headers: {
+              "Content-type": "application/json; charset=UTF-8"
+            },
+            body: JSON.stringify(newAccount) 
+          });
+        logIn(newAccount.AccountID);
+
+      } else {
+        alert('Incorrect email or password');
+      }
+   
+}
 
 
 

@@ -65,7 +65,6 @@ public async Task<ActionResult<Data>> Get(int inventoryID)
 
     }
  
-    // DELETE: api/data/{inventoryID}
 
     [HttpDelete("{inventoryID}")]
     public async Task<IActionResult> Delete(int inventoryID){

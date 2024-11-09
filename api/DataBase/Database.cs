@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using api.Models;
 using MySqlConnector;
 
+
 namespace api.DataBase
 {
     public class Database
@@ -152,7 +153,12 @@ namespace api.DataBase
 
 // ----------------------------------------------------------ACCOUNTS-----------------------------------------------------------------------------
 
-
+  public async Task<List<Account>> GetAllAccounts()
+        {
+             string sql = "SELECT * FROM ACCOUNTS WHERE isLoggedin = 'F';";
+             List<MySqlParameter> parms = new();
+             return await SelectAccount(sql, parms);
+        }
 
 private async Task<List<Account>> SelectAccount(string sql, List<MySqlParameter> parms){
     List<Account> myAccount = new();
@@ -229,17 +235,34 @@ private async Task<List<Account>> SelectAccount(string sql, List<MySqlParameter>
         new MySqlParameter("@isLoggedin", MySqlDbType.String) { Value = "T" }
 
     };
- 
     await AccountNoReturnSql(sql, parms);  
 }
 
-    public async Task<List<Account>> GetLoggedIn()
+    public async Task<List<Account>> GetLoggedIn(int accountID)
         {
-             string sql = $"SELECT * FROM ACCOUNTS WHERE isLoggedin = 'T';";
+             string sql = $"SELECT * FROM ACCOUNTS WHERE accountID = @accountID AND isLoggedin = 'T';";
               List<MySqlParameter> parms = new();
              return await SelectAccount(sql, parms);
         }
 
+    public async Task<List<Account>> SignIn(int accountID)
+        {
+            string sql = $"Update ACCOUNTS set isLoggedin = 'T' WHERE accountID = @accountID;";
+            List<MySqlParameter> parms = new();
+                parms.Add(new MySqlParameter("@accountID", MySqlDbType.Int32) {Value = accountID});
+                new MySqlParameter("@isLoggedin", MySqlDbType.String) { Value = "T" };
+             return await SelectAccount(sql, parms);
+        }
+
+ public async Task LogOut(int accountID)
+        {
+             string sql = $"Update ACCOUNTS set isLoggedin = 'F' WHERE accountID = @accountID;";
+              List<MySqlParameter> parms = new();
+                parms.Add(new MySqlParameter("@accountID", MySqlDbType.Int32) {Value = accountID});
+                new MySqlParameter("@isLoggedin", MySqlDbType.String) { Value = "F" };
+
+            await AccountNoReturnSql(sql, parms);
+        }
 
 
 

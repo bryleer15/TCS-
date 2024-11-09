@@ -1,13 +1,70 @@
 let data = [];
 let sportData = [];
+let myAccount = [];
+let account = null;
 let url = "http://localhost:5156/api/data";
+let url2 = "http://localhost:5156/api/account";
+let hasRedirected = localStorage.getItem('hasRedirected') || 'false';
 
-function handleOnLoad() {
+
+async function handleOnLoad() {
     getAllData().then(() => {
         displaySport('sportData');
         displayTeamsOnNewPage();
         displaySportsOnNewPage();
     });
+
+    localStorage.setItem('hasRedirected', 'false');
+    await logIn();
+    await loadData(); 
+        account = myAccount[0];
+        console.log(account)
+        isDirected(account);
+}
+
+async function loadData() {
+    await getAllData();
+    displayData();
+    loadCardData();
+}
+ 
+async function logIn() {
+    let response = await fetch(url2);
+    if (response.status === 200) {
+        myAccount = await response.json();
+        account = myAccount[0]; 
+    }
+    console.log(account);
+}
+ 
+async function isDirected(account) {
+    console.log(hasRedirected)
+    console.log(account)
+
+    if (!account || hasRedirected === 'true') {
+        console.log("Redirection already handled or account data is missing.");
+        return;
+
+    } else{
+        checkLogin(account)
+    }
+
+}
+
+async function checkLogin(account) {
+ 
+    console.log("Checking login status...");
+    console.log("Account:", account);
+ 
+    if (account.isLoggedin === 'T') {
+        console.log("Redirecting to index6.html");
+        localStorage.setItem('hasRedirected', 'true'); 
+        window.location.href = './index6.html';
+    } else {
+        console.log("Redirecting to index.html");
+        localStorage.setItem('hasRedirected', 'true'); 
+        window.location.href = './index.html';
+    }
 }
 
 async function getAllData() {
@@ -45,7 +102,7 @@ async function displaySport(dataKey) {
                         <p>PSA Rating: ${item.rating}</p>
                         <p>Price: $${item.price}</p>
                         <p>${item.descriptions}</p>
-                        <a href="${item.price}" class="btn-primary">Buy Now</a>
+                        <button class="btn-primary" onclick="openModal('${item.firstName} ${item.lastName}', ${item.price})">Buy Now</button>
                     </div>
                 </div>
             </div>
@@ -60,6 +117,18 @@ async function displaySport(dataKey) {
     } else {
         console.error('Element with ID "data2" not found');
     }
+}
+
+function openModal(name, price) {
+    const modal = document.getElementById("buyModal");
+    modal.style.display = "block";
+    document.getElementById("modalTitle").innerText = `Purchase ${name}`;
+    document.getElementById("modalPrice").innerText = `Price: $${price}`;
+}
+
+// Function to close the modal
+function closeModal() {
+    document.getElementById("buyModal").style.display = "none";
 }
 
 function displayTeamsOnNewPage(selectedSport) {

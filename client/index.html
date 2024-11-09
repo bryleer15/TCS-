@@ -18,13 +18,13 @@
             <a class="btn btn-toggle align-items-center rounded" href="./index.html">Home</a>
         </li>
         <li class="mb-1">
-          <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+          <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#sports-collapse" aria-expanded="false">
               Sports
           </button>
-          <div class="collapse" id="dashboard-collapse">
+          <div class="collapse" id="sports-collapse">
               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                   <div id="sport-list" class="mt-3">
-                      <ul id="sports" class="list-group"></ul>
+                      <ul id="sports" class="list-group"></ul> <!-- Sports List -->
                   </div>
               </ul>
           </div>
@@ -77,18 +77,18 @@
       <h4>Sign In</h4>
       <form class="row g-3">
         <div class="col-md-6">
-          <label for="inputEmail4" class="form-label">Email</label>
-          <input type="email" class="form-control" id="inputEmail4">
+          <label for="inputEmail" class="form-label">Email</label>
+          <input type="email" class="form-control" id="inputEmail">
         </div>
         <div class="col-md-6">
-          <label for="inputPassword4" class="form-label">Password</label>
-          <input type="password" class="form-control" id="inputPassword4">
+          <label for="inputPassword" class="form-label">Password</label>
+          <input type="password" class="form-control" id="inputPassword">
         </div>
         <div class="col-12">
-          <button type="button" class="btn btn-primary2" onclick="logIn(); window.location.href = './index6.html'">Sign In</button>
+          <button type="button" class="btn btn-primary2" onclick="signInHome()">Sign In</button>
         <button type="button" class="btn btn-primary2" onclick="window.location.href = './index3.html'">Sign Up</button>
       </div>
-      <div id="data" class="row"></div> <!-- Display all cards here -->
+      <div id="data" class="row"></div> 
 
       </form>
 </div>
