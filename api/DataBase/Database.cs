@@ -219,10 +219,11 @@ private async Task<List<Account>> SelectAccount(string sql, List<MySqlParameter>
     public async Task InsertAccount(Account myAccount){
 
     string sql = @$"INSERT INTO ACCOUNTS
-            (email, pass_word, fname, lname, address, city, state, zip_code, isAdmin, isLoggedin)
-            VALUES ( @email, @password, @fname, @lname, @address, @city, @state, @zip, @isAdmin, @isLoggedin);";
+            (accountID, email, pass_word, fname, lname, address, city, state, zip_code, isAdmin, isLoggedin)
+            VALUES (@accountID, @email, @password, @fname, @lname, @address, @city, @state, @zip, @isAdmin, @isLoggedin);";
  
     List<MySqlParameter> parms = new(){
+        new MySqlParameter("@accountID", MySqlDbType.Int32) { Value = myAccount.AccountID },
         new MySqlParameter("@email", MySqlDbType.String) { Value = myAccount.Email },
         new MySqlParameter("@password", MySqlDbType.String) { Value = myAccount.Password },
         new MySqlParameter("@fname", MySqlDbType.String) { Value = myAccount.FName },
@@ -242,6 +243,8 @@ private async Task<List<Account>> SelectAccount(string sql, List<MySqlParameter>
         {
              string sql = $"SELECT * FROM ACCOUNTS WHERE accountID = @accountID AND isLoggedin = 'T';";
               List<MySqlParameter> parms = new();
+                parms.Add(new MySqlParameter("@accountID", MySqlDbType.Int32) {Value = accountID});
+                new MySqlParameter("@isLoggedin", MySqlDbType.String) { Value = "T" };
              return await SelectAccount(sql, parms);
         }
 
