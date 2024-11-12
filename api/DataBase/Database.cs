@@ -114,12 +114,12 @@ namespace api.DataBase
 }
  
     public async Task UpdateData(Data myData, int inventoryID){
-
+System.Console.WriteLine(inventoryID);
     string sql = @$"UPDATE CARDSMEMORBILLIA
-        SET Sport = @sport, Price = @price, FirstName = @firstName,
-        LastName = @lastName, Team = @team, Rating = @rating,
-        Category = @category, IsBiddable = @isBiddable,
-        Descriptions = @descriptions, Bought = @bought, Picture = @picture
+        SET sport = @sport, price = @price, firstName = @firstName,
+        LastName = @lastName, team = @team, rating = @rating,
+        category = @category, isBiddable = @isBiddable,
+        descriptions = @descriptions, bought = @bought, picture = @picture
         WHERE inventoryID = @inventoryID;";
  
         List<MySqlParameter> parms = new(){
@@ -130,10 +130,10 @@ namespace api.DataBase
         new MySqlParameter("@lastName", MySqlDbType.String) { Value = myData.LastName },
         new MySqlParameter("@team", MySqlDbType.String) { Value = myData.Team },
         new MySqlParameter("@rating", MySqlDbType.Int32) { Value = myData.Rating },
-        new MySqlParameter("@isBiddable", MySqlDbType.String) { Value = "F" },
+        new MySqlParameter("@isBiddable", MySqlDbType.String) { Value = myData.IsBiddable },
         new MySqlParameter("@category", MySqlDbType.String) { Value = myData.Category },
         new MySqlParameter("@descriptions", MySqlDbType.String) { Value = myData.Descriptions },
-        new MySqlParameter("@bought", MySqlDbType.String) { Value = "F" },        
+        new MySqlParameter("@bought", MySqlDbType.String) { Value = myData.Bought },        
         new MySqlParameter("@picture", MySqlDbType.String) { Value = myData.Picture } // Update image data
 
     };

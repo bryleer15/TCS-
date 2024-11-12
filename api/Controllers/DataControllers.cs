@@ -57,12 +57,10 @@ public async Task<ActionResult<Data>> Get(int inventoryID)
 
 
     [HttpPut("{inventoryID}")]
-    public async Task<IActionResult> Put(int inventoryID, [FromForm] Data value){
- 
+    public async Task Put(int inventoryID, [FromBody] Data value){
+        System.Console.WriteLine("made to put");
         Database myDatabase = new();
         await myDatabase.UpdateData(value, inventoryID);
-        return Ok();
-
     }
  
 
