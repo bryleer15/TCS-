@@ -51,7 +51,7 @@ namespace MyApp.Namespace
         public async Task Delete(int accountID)
         {
             Database myDatabase = new();
-            await myDatabase.LogOut(accountID);
+            await myDatabase.DeleteAccount(accountID);
         }
     }
 }
