@@ -47,11 +47,11 @@ public async Task<ActionResult<Data>> Get(int inventoryID)
 
  
     [HttpPost]
-        public async Task Post([FromBody] Account value)
+        public async Task Post([FromBody] Data value)
         {
-            System.Console.WriteLine(value.FName);
+          
             Database myDatabase = new();
-            await myDatabase.InsertAccount(value);
+            await myDatabase.InsertData(value);
         }
  
 

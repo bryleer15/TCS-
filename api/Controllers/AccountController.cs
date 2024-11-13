@@ -38,13 +38,21 @@ namespace MyApp.Namespace
         }
 
         // PUT: api/Account/{accountID}
-        [HttpPut("{accountID}")]
-        public async Task Put(int accountID, [FromBody] Account value)
-        {
-            System.Console.WriteLine("Made it to put");
-            Database myDatabase = new();
-            await myDatabase.SignIn(accountID);
-        }
+       [HttpPut("{accountID}")]
+    public async Task<IActionResult> Put(int accountID, [FromBody] Account value){
+    Console.WriteLine("Made it to PUT");
+
+    if (value == null || string.IsNullOrEmpty(value.IsLoggedin))
+    {
+        return BadRequest("Invalid account data or missing isLoggedin status.");
+    }
+
+    Database myDatabase = new();
+    await myDatabase.SignIn(accountID, value.IsLoggedin); 
+    
+    return Ok("Account login status updated successfully");
+}
+
 
         // DELETE: api/Account/{accountID}
         [HttpDelete("{accountID}")]

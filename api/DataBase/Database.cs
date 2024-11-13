@@ -209,13 +209,6 @@ private async Task<List<Account>> SelectAccount(string sql, List<MySqlParameter>
     
         }
 
-    // public async Task<List<Account>> GetAdminAccount()
-    //     {
-    //          string sql = "SELECT * FROM ACCOUNTS WHERE isadmin = 'T' ";
-    //          List<MySqlParameter> parms = new();
-
-    //          return await SelectAccount(sql, parms);
-    //     }
 
     public async Task InsertAccount(Account myAccount){
 
@@ -233,15 +226,14 @@ private async Task<List<Account>> SelectAccount(string sql, List<MySqlParameter>
         new MySqlParameter("@city", MySqlDbType.String) { Value = myAccount.City},
         new MySqlParameter("@state", MySqlDbType.String) { Value = myAccount.State },
         new MySqlParameter("@zip", MySqlDbType.String) { Value = myAccount.Zip },
-        new MySqlParameter("@isAdmin", MySqlDbType.String) { Value = "F" },
-        new MySqlParameter("@isLoggedin", MySqlDbType.String) { Value = "T" }
+        new MySqlParameter("@isAdmin", MySqlDbType.String){ Value = myAccount.IsAdmin },
+        new MySqlParameter("@isLoggedin", MySqlDbType.String) { Value = myAccount.IsLoggedin }
 
     };
     await AccountNoReturnSql(sql, parms);  
 }
 
-    public async Task<List<Account>> GetLoggedIn(int accountID)
-        {
+    public async Task<List<Account>> GetLoggedIn(int accountID){
              string sql = $"SELECT * FROM ACCOUNTS WHERE accountID = @accountID AND isLoggedin = 'T';";
               List<MySqlParameter> parms = new();
                 parms.Add(new MySqlParameter("@accountID", MySqlDbType.Int32) {Value = accountID});
@@ -249,25 +241,23 @@ private async Task<List<Account>> SelectAccount(string sql, List<MySqlParameter>
              return await SelectAccount(sql, parms);
         }
 
-    public async Task<List<Account>> SignIn(int accountID)
-        {
-            string sql = $"Update ACCOUNTS set isLoggedin = 'T' WHERE accountID = @accountID;";
-            List<MySqlParameter> parms = new();
-                parms.Add(new MySqlParameter("@accountID", MySqlDbType.Int32) {Value = accountID});
-                new MySqlParameter("@isLoggedin", MySqlDbType.String) { Value = "T" };
-             return await SelectAccount(sql, parms);
-        }
+     public async Task<List<Account>> SignIn(int accountID, string isLoggedin){
+    string sql = $"UPDATE ACCOUNTS SET IsLoggedin = @IsLoggedin WHERE accountID = @accountID;";
+    List<MySqlParameter> parms = new(){
+        new MySqlParameter("@accountID", MySqlDbType.Int32) { Value = accountID },
+        new MySqlParameter("@IsLoggedin", MySqlDbType.String) { Value = isLoggedin }
+    };
 
- public async Task LogOut(int accountID)
+    return await SelectAccount(sql, parms);
+}
+
+public async Task DeleteAccount(int accountID)
         {
-             string sql = $"Update ACCOUNTS set isLoggedin = 'F' WHERE accountID = @accountID;";
+             string sql = $"DELETE from ACCOUNTS WHERE accountID = @accountID;";
               List<MySqlParameter> parms = new();
-                parms.Add(new MySqlParameter("@accountID", MySqlDbType.Int32) {Value = accountID});
-                new MySqlParameter("@isLoggedin", MySqlDbType.String) { Value = "F" };
-
+              parms.Add(new MySqlParameter("@accountID", MySqlDbType.Int32) {Value = accountID});
             await AccountNoReturnSql(sql, parms);
         }
-
 
 
 
