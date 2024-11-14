@@ -242,10 +242,10 @@ private async Task<List<Account>> SelectAccount(string sql, List<MySqlParameter>
         }
 
      public async Task<List<Account>> SignIn(int accountID, string isLoggedin){
-    string sql = $"UPDATE ACCOUNTS SET IsLoggedin = @IsLoggedin WHERE accountID = @accountID;";
+    string sql = $"UPDATE ACCOUNTS SET isLoggedin = @isLoggedin WHERE accountID = @accountID;";
     List<MySqlParameter> parms = new(){
         new MySqlParameter("@accountID", MySqlDbType.Int32) { Value = accountID },
-        new MySqlParameter("@IsLoggedin", MySqlDbType.String) { Value = isLoggedin }
+        new MySqlParameter("@isLoggedin", MySqlDbType.String) { Value = isLoggedin }
     };
 
     return await SelectAccount(sql, parms);
