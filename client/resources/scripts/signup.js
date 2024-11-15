@@ -17,7 +17,6 @@ async function handleAddAccount(){
         State: document.getElementById("inputState").value,
         Zip: document.getElementById("inputZip").value
       
-      
     };
  
     console.log(newAccount);

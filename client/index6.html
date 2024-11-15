@@ -15,20 +15,13 @@
     </a>
     <ul class="list-unstyled ps-0">
         <li class="mb-1">
-            <a class="btn btn-toggle align-items-center rounded" onclick = "isDirected(account)">Home</a>
+            <a class="btn btn-toggle align-items-center rounded" href="./index6.html">Home</a>
         </li>
         <li class="mb-1">
-          <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-              Sports
-          </button>
-          <div class="collapse" id="dashboard-collapse">
-              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                  <div id="sport-list" class="mt-3">
-                      <ul id="sports" class="list-group"></ul>
-                  </div>
-              </ul>
-          </div>
-      </li>
+            <button class="btn btn-toggle align-items-center rounded collapsed" onclick="getSport('Hockey'); window.location.href = './index2.html';" data-bs-toggle="collapse" data-bs-target="#sports-collapse" aria-expanded="false">
+                See More Sports!
+            </button>  
+        </li>
         <li class="mb-1">
             <a class="btn btn-toggle align-items-center rounded" href="./index4.html">Bidding</a>
         </li>
@@ -40,13 +33,13 @@
             <div class="collapse" id="account-collapse">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li><a href="#" class="link-dark rounded">Profile</a></li>
-
-                    <li><a onclick="handleLogOut()" class="link-dark rounded">Sign out</a></li>
+                    <li><a onclick="toggleLoginStatus()" class="link-dark rounded">Sign out</a></li>
                 </ul>
             </div>
         </li>
     </ul>
 </nav>
+
 
 <div class="main-content">
     <h1>TUSCALOOSA CARD SHARKS</h1>

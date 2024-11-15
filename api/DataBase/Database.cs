@@ -259,8 +259,59 @@ public async Task DeleteAccount(int accountID)
             await AccountNoReturnSql(sql, parms);
         }
 
+// -----------------------------------------------------TRANSACTIONS------------------------------------------------------------- //
+
+private async Task TransactionNoReturnSql(string sqlInsert, string sqlUpdate, List<MySqlParameter> parms)
+{
+    using var connection = new MySqlConnection(cs);
+    await connection.OpenAsync();
+    using var transaction = await connection.BeginTransactionAsync();
+
+    try
+    {
+        // First command: Insert transaction
+        var insertCmd = new MySqlCommand(sqlInsert, connection, transaction);
+        insertCmd.Parameters.AddRange(parms.ToArray());
+        await insertCmd.ExecuteNonQueryAsync();
+
+        // Second command: Update CARDSMEMORBILLIA
+        var updateCmd = new MySqlCommand(sqlUpdate, connection, transaction);
+        // Use only the inventoryID parameter for the update command
+        updateCmd.Parameters.Add(parms.Find(p => p.ParameterName == "@inventoryID"));
+        await updateCmd.ExecuteNonQueryAsync();
+
+        await transaction.CommitAsync();
+    }
+    catch
+    {
+        await transaction.RollbackAsync();
+        throw;
+    }
+}
 
 
+public async Task InsertTransaction(Transaction myTransaction)
+{
+    string insertSql = @$"
+        INSERT INTO TRANSACTIONS (transID, accountID, inventoryID, price, transDate)
+        VALUES (@transID, @accountID, @inventoryID, @price, @transDate);";
+
+    string updateSql = @$"
+        UPDATE CARDSMEMORBILLIA 
+        SET bought = 'T'
+        WHERE inventoryID = @inventoryID;";
+
+    List<MySqlParameter> parms = new()
+    {
+        new MySqlParameter("@transID", MySqlDbType.Int32) { Value = myTransaction.TransID },
+        new MySqlParameter("@accountID", MySqlDbType.Int32) { Value = myTransaction.AccountID },
+        new MySqlParameter("@inventoryID", MySqlDbType.Int32) { Value = myTransaction.InventoryID },
+        new MySqlParameter("@price", MySqlDbType.Decimal) { Value = myTransaction.Price },
+        new MySqlParameter("@transDate", MySqlDbType.Date) { Value = myTransaction.TransDate.Date }
+    };
+
+    await TransactionNoReturnSql(insertSql, updateSql, parms);
+}
 
 
 
