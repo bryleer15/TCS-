@@ -319,3 +319,84 @@ async function handleAddTransaction(inventoryID, price) {
         alert("An error occurred while processing the transaction.");
     }
 }
+
+async function viewTransaction(){
+  
+    try {
+        let response = await fetch(url3 + account.accountID);
+        if (!response.ok) throw new Error('Network response was not ok');
+        myTransaction = await response.json();
+        console.log(myTransaction)
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+    }
+
+}
+
+async function displayBought() {
+   
+    document.getElementById("data2").style.display = "none";
+
+
+    // Call viewTransaction() to populate myTransaction and data
+    await viewTransaction();
+
+    // Filter data for bought items and matching inventoryID
+    const filteredData = data.filter(item => 
+        item.bought === 'T' && 
+        myTransaction.some(transaction => transaction.inventoryID === item.inventoryID)
+    );
+
+    // Start with the first table (transactions)
+    let html = `<table class="table">
+    <tr>
+      <th>Transaction ID</th>
+      <th>Account ID</th>
+      <th>Inventory ID</th>
+      <th>Price</th>
+      <th>Transaction Date</th>
+    </tr>`;
+
+    myTransaction.forEach((transaction) => {
+        html += `<tr>
+          <td>${transaction.transID}</td>
+          <td>${transaction.accountID}</td>
+          <td>${transaction.inventoryID}</td>
+          <td>${transaction.price}</td>
+          <td>${transaction.transDate}</td>
+        </tr>`;
+    });
+
+    // Close the first table
+    html += `</table><br/>`;
+
+    // Add the second table (filtered data)
+    html += `<table class="table">
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Category</th>
+      <th>Price</th>
+      <th>Team</th>
+    </tr>`;
+
+    filteredData.forEach((item) => {
+        html += `<tr>
+          <td>${item.firstName}</td>
+          <td>${item.lastName}</td>
+          <td>${item.category}</td>
+          <td>${item.price}</td>
+          <td>${item.team}</td>
+        </tr>`;
+    });
+
+    // Close the second table
+    html += `</table>`;
+
+    let app3Element = document.getElementById("app3");
+    if (app3Element) {
+        app3Element.innerHTML = html;
+    } else {
+        console.error("Element with ID 'app3' not found.");
+    }
+}

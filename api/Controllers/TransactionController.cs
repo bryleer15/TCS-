@@ -11,10 +11,20 @@ namespace api.Controllers
     public class TransactionController : ControllerBase
     {
 
+    [HttpGet]
+    public async Task<List<Transaction>> Get(){
+        Database myDatabase = new();
+        return await myDatabase.GetAllTransactions();
+    }
+     [HttpGet("{accountID}")]
+        public async Task<List<Transaction>> Get(int accountID)
+        {
+            Database myDatabase = new();
+            return await myDatabase.GetAccountTransaction(accountID);
+        }
 
         [HttpPost]
-public async Task<IActionResult> Post([FromBody] Transaction value)
-{
+    public async Task<IActionResult> Post([FromBody] Transaction value){
     try
     {
         Database myDatabase = new();

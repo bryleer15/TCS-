@@ -1,9 +1,11 @@
 let data = [];
 let sportData = [];
 let myAccount = [];
+let myTransaction = [];
 let account = null;
 let url = "http://localhost:5156/api/data";
 let url2 = "http://localhost:5156/api/account/";
+let url3 = "http://localhost:5156/api/transaction/"
 
 let hasRedirected = localStorage.getItem('hasRedirected') || 'false';
 let myAccounts = [];
@@ -39,7 +41,6 @@ async function loadData() {
     displayData();
     loadCardData();
 }
-
 
 async function getAllData() {
   try {
@@ -100,6 +101,7 @@ async function displayData() {
 function reloadPage() {
     getAllData();
     displayData();
+
 }
 
 function handleAddForm() {   
@@ -329,11 +331,6 @@ async function displayAccounts() {
       document.getElementById("app2").innerHTML = html;
 }
 
-function reloadPage() {
-    getAllData();
-    displayData();
-}
-
 async function handleDeleteAccount(accountID) {
     await fetch(url2 + accountID, {
         method: "DELETE",
@@ -459,10 +456,6 @@ async function signInHome() {
     }
 }
 
-
-
-
-
 async function toggleLoginStatus() {
     try {
         let account = JSON.parse(localStorage.getItem('passBy'));
@@ -505,4 +498,46 @@ async function toggleLoginStatus() {
     } catch (error) {
         console.error('Error toggling login status:', error);
     }
+}
+
+async function viewAllTransactions(){
+    try {
+        let response = await fetch(url3);
+        if (!response.ok) throw new Error('Network response was not ok');
+        myTransaction = await response.json();
+        console.log(myTransaction);
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+    }
+
+}
+
+async function displayBought() {
+
+    document.getElementById("app").style.display = "none";
+    document.getElementById("data").style.display = "none";
+    document.getElementById("app2").style.display = "none";
+    viewAllTransactions();
+
+    let html = `<table class="table">
+    <tr>
+      <th>Transaction ID</th>
+      <th>Account ID</th>
+      <th>Inventory ID</th>
+       <th>Price</th>
+        <th>Transaction Date</th>
+     
+    </tr>`;
+      myTransaction.forEach((transaction) => {
+          html += `<tr>
+              <td>${transaction.transID}</td>
+              <td>${transaction.accountID}</td>
+              <td>${transaction.inventoryID}</td>
+              <td>${transaction.price}</td>
+              <td>${transaction.transDate}</td>
+          </tr>`;
+      });
+     
+      document.getElementById("app3").innerHTML = html;
+    
 }

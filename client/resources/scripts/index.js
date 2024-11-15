@@ -4,6 +4,7 @@ let myAccount = [];
 let account = null;
 let url = "http://localhost:5156/api/data";
 let url2 = "http://localhost:5156/api/account/";
+let url3 = "http://localhost:5156/api/transaction/";
  
 let hasRedirected = localStorage.getItem('hasRedirected') || 'false';
 let myAccounts = [];
@@ -330,10 +331,6 @@ function handleSportClick(sport) {
 }
 
 
-
-
-
-
 function openModal(name, price) {
     const modal = document.getElementById("buyModal");
     modal.style.display = "block";
@@ -364,4 +361,84 @@ function openModal(name, price) {
 
 function closeModal() {
     document.getElementById("buyModal").style.display = "none";
+}
+
+async function viewTransaction(){
+  
+    try {
+        let response = await fetch(url3 + account.accountID);
+        if (!response.ok) throw new Error('Network response was not ok');
+        myTransaction = await response.json();
+        console.log(myTransaction)
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+    }
+
+}
+
+async function displayBought() {
+    // Hide unnecessary sections
+    document.getElementById("app").style.display = "none";
+    document.getElementById("data").style.display = "none";
+    document.getElementById("app2").style.display = "none";
+    document.getElementById("row").style.display = "none";
+
+
+    // Call viewTransaction() to populate myTransaction and data
+    await viewTransaction();
+
+    // Filter data for bought items and matching inventoryID
+    const filteredData = data.filter(item => 
+        item.bought === 'T' && 
+        myTransaction.some(transaction => transaction.inventoryID === item.inventoryID)
+    );
+
+    // Start with the first table (transactions)
+    let html = `<table class="table">
+    <tr>
+      <th>Transaction ID</th>
+      <th>Account ID</th>
+      <th>Inventory ID</th>
+      <th>Price</th>
+      <th>Transaction Date</th>
+    </tr>`;
+
+    myTransaction.forEach((transaction) => {
+        html += `<tr>
+          <td>${transaction.transID}</td>
+          <td>${transaction.accountID}</td>
+          <td>${transaction.inventoryID}</td>
+          <td>${transaction.price}</td>
+          <td>${transaction.transDate}</td>
+        </tr>`;
+    });
+
+    // Close the first table
+    html += `</table><br/>`;
+
+    // Add the second table (filtered data)
+    html += `<table class="table">
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Category</th>
+      <th>Price</th>
+      <th>Team</th>
+    </tr>`;
+
+    filteredData.forEach((item) => {
+        html += `<tr>
+          <td>${item.firstName}</td>
+          <td>${item.lastName}</td>
+          <td>${item.category}</td>
+          <td>${item.price}</td>
+          <td>${item.team}</td>
+        </tr>`;
+    });
+
+    // Close the second table
+    html += `</table>`;
+
+    // Display the HTML in the app3 div
+    document.getElementById("app3").innerHTML = html;
 }

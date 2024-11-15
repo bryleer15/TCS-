@@ -289,6 +289,39 @@ private async Task TransactionNoReturnSql(string sqlInsert, string sqlUpdate, Li
     }
 }
 
+private async Task<List<Transaction>> SelectTransaction(string sql, List<MySqlParameter> parms){
+    List<Transaction> myTransaction = new();
+    using var connection = new MySqlConnection(cs);
+    await connection.OpenAsync();
+    using var command = new MySqlCommand(sql, connection);
+ 
+    if (parms != null)
+    {
+        command.Parameters.AddRange(parms.ToArray());
+    }
+ 
+    using var reader = await command.ExecuteReaderAsync();
+    while (await reader.ReadAsync())
+    {
+ 
+        myTransaction.Add(new Transaction()
+        {
+             TransID = reader.GetInt32(0),
+            AccountID = reader.GetInt32(1),
+            InventoryID = reader.GetInt32(2),
+            TransDate = reader.GetDateTime(3),
+            Price = reader.GetInt32(4)
+        });
+    }
+ 
+    return myTransaction;
+}
+ public async Task<List<Transaction>> GetAllTransactions()
+        {
+             string sql = "SELECT * FROM TRANSACTIONS;";
+             List<MySqlParameter> parms = new();
+             return await SelectTransaction(sql, parms);
+        }
 
 public async Task InsertTransaction(Transaction myTransaction)
 {
@@ -313,6 +346,17 @@ public async Task InsertTransaction(Transaction myTransaction)
     await TransactionNoReturnSql(insertSql, updateSql, parms);
 }
 
+
+  public async Task<List<Transaction>> GetAccountTransaction(int accountID){
+    string sql = "SELECT * FROM TRANSACTIONS WHERE accountID = @accountID;";
+
+    List<MySqlParameter> parms = new()
+    {
+        new MySqlParameter("@accountID", MySqlDbType.Int32) { Value = accountID }
+    };
+
+    return await SelectTransaction(sql, parms);
+}
 
 
 
