@@ -183,28 +183,6 @@ h4 {
     border-color: #aa0606;
 }
 
-.navbar {
-  justify-content: center;
-  font-size: 1.5rem; /* Increase font size */
-  padding-left: 50px;
-  padding-right: 50px;
-}
-
-.navbar-brand,
-.navbar-nav .nav-item .nav-link,
-.navbar-text {
-  font-size: 1.5rem; /* Make all navbar text larger */
-  text-align: center;
-}
-
-.navbar-nav {
-  margin: auto; /* Center the navigation links */
-}
-
-.navbar-text {
-  font-weight: bold; /* Optional: make 'About Us' bold */
-}
-
 
 /* General form container */
 form {
@@ -212,7 +190,6 @@ form {
   margin: 0 auto;
   padding: 20px;
   color:#413939;
-  background-color: #efecec;
 
 }
 /* Form labels */
@@ -245,7 +222,7 @@ input[type="password"] {
   left: 0;
   width: 280px;
   border-right: 15px double #413939;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 0 5px #7a6767;
   background-color: #c5bcbc;
 }
 
@@ -261,22 +238,25 @@ input[type="password"] {
 }
 
 .flex-shrink-0 ul {
-  padding-left: 0;
+  padding: 0px;
+  color: #413939;
+  gap: 2px; /* Reduce spacing between buttons */
 }
 
 .flex-shrink-0 .btn-toggle {
   width: 100%;
   font-size: 16px;
   font-weight: bold;
-  background-color: #f8f9fa !important;
+  background-color: #f8f9fa;
   border: none;
   text-align: left;
-  padding: 10px;
-  transition: background-color 0.3s;
+  margin: 1px 0; /* Reduce space between buttons */
+  padding: 10px; /* Maintain comfortable padding inside buttons */
+    transition: background-color 0.3s;
 }
 
 .flex-shrink-0 .btn-toggle:hover {
-  background-color: #9f3535 !important;
+  background-color: #9f3535;
 }
 
 .flex-shrink-0 .collapse.show {
@@ -286,7 +266,7 @@ input[type="password"] {
 
 .flex-shrink-0 .btn-toggle-nav a {
   padding-left: 20px;
-  color: #000000!important;
+  color: #7a6767;
   text-decoration: none;
 }
 
@@ -294,6 +274,7 @@ input[type="password"] {
   background-color: #790101;
   border-radius: 5px;
 }
+
 /* Main content styling */
 .main-content {
     margin-left: 300px; /* Space for the sidebar */
@@ -506,4 +487,5 @@ button[type="submit"] {
 button[type="submit"]:hover {
   background-color: red;
 }
+
 

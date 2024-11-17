@@ -7,28 +7,28 @@ let url2 = "http://localhost:5156/api/account/";
 let url3 = "http://localhost:5156/api/transaction/";
  
 let hasRedirected = localStorage.getItem('hasRedirected') || 'false';
+let newAccount = localStorage.getItem('passBy')
 let myAccounts = [];
  
 async function handleOnLoad() {
-    getAllAccounts();
    
-    // Fetch initial data
-    await getAllData(); // Ensures `data` is fully populated
+    getAllData().then(() => { 
+        displayData();
+        displaySport('sportData');
+        displaySportsOnNewPage();
+    });
 
-    // Verify that data was loaded
-    console.log("Loaded data:", data); // Debugging line
+    await getAllAccounts();
 
-    // Now display data
-    displayData();
+    console.log("Loaded data:", data); 
 
-    // Other initial setups
-    displaySport('sportData');
-    displaySportsOnNewPage();
     localStorage.setItem('hasRedirected', 'false');
 
     account = JSON.parse(localStorage.getItem('passBy'));
-    console.log("Account retrieved on load:", account);
-
+    console.log("Account retrieved:", account);  
+        
+    console.log("Account after load:", account); 
+    
     await loadData();
 }
 
@@ -48,7 +48,6 @@ async function getAllAccounts() {
 
 async function loadData() {
     await getAllData();
-    displayData();
     loadCardData();
 }
 
@@ -310,7 +309,8 @@ function displaySportsOnNewPage() {
 
     sports.forEach(sport => {
         let li = document.createElement("li");
-        li.className = "list-group-item";
+        li.className = "list-group-item d-flex justify-content-between align-items-center"; // Adjusted for alignment
+
 
         let button = document.createElement("button");
         button.className = "btn btn-link text-decoration-none";
@@ -441,4 +441,122 @@ async function displayBought() {
 
     // Display the HTML in the app3 div
     document.getElementById("app3").innerHTML = html;
+}
+
+async function handleAddTransaction(inventoryID, price) {
+    try {
+        const currentDate = new Date();
+        const dateOnly = currentDate.toISOString().split('T')[0];
+        console.log("Transaction Date:", dateOnly);
+
+        let trans = {
+            accountID: account.accountID,  // Ensure `account.accountID` is defined and available
+            inventoryID: inventoryID,
+            price: price,
+            transDate: dateOnly
+        };
+        console.log("Transaction Data:", trans);
+
+        const response = await fetch(url3, {
+            method: "POST",
+            body: JSON.stringify(trans),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        });
+
+        if (response.ok) {
+            console.log("Transaction successful");
+            closeModal();  // Close modal upon successful transaction
+            // Optionally reload or update page here
+            // handleOnLoad();
+        } else {
+            console.error("Transaction failed", response.statusText);
+            alert("Failed to complete transaction. Please try again.");
+        }
+    } catch (error) {
+        console.error("Error occurred:", error);
+        alert("An error occurred while processing the transaction.");
+    }
+}
+
+async function viewTransaction(){
+  
+    try {
+        let response = await fetch(url3 + account.accountID);
+        if (!response.ok) throw new Error('Network response was not ok');
+        myTransaction = await response.json();
+        console.log(myTransaction)
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+    }
+
+}
+
+async function displayBought() {
+   
+    document.getElementById("data").style.display = "none";
+
+
+    // Call viewTransaction() to populate myTransaction and data
+    await viewTransaction();
+
+    // Filter data for bought items and matching inventoryID
+    const filteredData = data.filter(item => 
+        item.bought === 'T' && 
+        myTransaction.some(transaction => transaction.inventoryID === item.inventoryID)
+    );
+
+    // Start with the first table (transactions)
+    let html = `<table class="table">
+    <tr>
+      <th>Transaction ID</th>
+      <th>Account ID</th>
+      <th>Inventory ID</th>
+      <th>Price</th>
+      <th>Transaction Date</th>
+    </tr>`;
+
+    myTransaction.forEach((transaction) => {
+        html += `<tr>
+          <td>${transaction.transID}</td>
+          <td>${transaction.accountID}</td>
+          <td>${transaction.inventoryID}</td>
+          <td>${transaction.price}</td>
+          <td>${transaction.transDate}</td>
+        </tr>`;
+    });
+
+    // Close the first table
+    html += `</table><br/>`;
+
+    // Add the second table (filtered data)
+    html += `<table class="table">
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Category</th>
+      <th>Price</th>
+      <th>Team</th>
+    </tr>`;
+
+    filteredData.forEach((item) => {
+        html += `<tr>
+          <td>${item.firstName}</td>
+          <td>${item.lastName}</td>
+          <td>${item.category}</td>
+          <td>${item.price}</td>
+          <td>${item.team}</td>
+        </tr>`;
+    });
+
+    // Close the second table
+    html += `</table>`;
+
+    let app3Element = document.getElementById("app3");
+    if (app3Element) {
+        app3Element.innerHTML = html;
+    } else {
+        console.error("Element with ID 'app3' not found.");
+    }
 }
