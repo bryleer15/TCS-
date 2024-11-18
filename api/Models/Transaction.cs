@@ -12,5 +12,6 @@ namespace api.Models
         public int InventoryID {get; set;}
         public int Price {get; set;}
         public DateTime TransDate { get; set; }
+        public int BidID { get; set; }
     }
 }

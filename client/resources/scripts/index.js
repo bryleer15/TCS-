@@ -32,7 +32,12 @@ async function handleOnLoad() {
     await loadData();
 }
 
+async function loadData() {
+    await getAllData();
+    loadCardData();
+}
  
+// -----------------------------------------------------------------ACCOUNTS----------------------------------------------------------------//
 
 async function getAllAccounts() {
     console.log("fetching accounts")
@@ -46,10 +51,6 @@ async function getAllAccounts() {
     }
   }
 
-async function loadData() {
-    await getAllData();
-    loadCardData();
-}
 
 async function signInHome() {
     const email = document.getElementById('inputEmail').value;
@@ -141,6 +142,9 @@ async function toggleLoginStatus() {
         console.error('Error toggling login status:', error);
     }
 }
+
+// -----------------------------------------------------------------DATA----------------------------------------------------------------//
+
 
 async function getAllData() {
   try {
@@ -330,6 +334,9 @@ function handleSportClick(sport) {
     });
 }
 
+// -----------------------------------------------------------------TRANSACTIONS----------------------------------------------------------------//
+
+
 
 function openModal(name, price) {
     const modal = document.getElementById("buyModal");
@@ -356,8 +363,6 @@ function openModal(name, price) {
     // Insert the HTML into the designated container in the modal
     document.getElementById("buynow").innerHTML = html;
 }
-
-
 
 function closeModal() {
     document.getElementById("buyModal").style.display = "none";

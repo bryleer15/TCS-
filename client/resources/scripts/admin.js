@@ -25,22 +25,15 @@ async function handleOnLoad() {
     await loadData();
 }
 
-async function getAllAccounts() {
-    try {
-        let response = await fetch(url2);
-        if (!response.ok) throw new Error('Network response was not ok');
-        myAccounts = await response.json();
-        console.log(myAccounts);
-    } catch (error) {
-        console.error('There was a problem with the fetch operation:', error);
-    }
-}
-
 async function loadData() {
     await getAllData();
     displayData();
     loadCardData();
 }
+
+
+// -----------------------------------------------------------------DATA----------------------------------------------------------------//
+
 
 async function getAllData() {
   try {
@@ -293,6 +286,21 @@ async function handleBought(inventoryID) {
     
 }
 
+
+// -----------------------------------------------------------------ACCOUNTS----------------------------------------------------------------//
+
+
+async function getAllAccounts() {
+    try {
+        let response = await fetch(url2);
+        if (!response.ok) throw new Error('Network response was not ok');
+        myAccounts = await response.json();
+        console.log(myAccounts);
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+    }
+}
+
 async function displayAccounts() {
 
     document.getElementById("app").style.display = "none";
@@ -499,6 +507,10 @@ async function toggleLoginStatus() {
         console.error('Error toggling login status:', error);
     }
 }
+
+
+// -----------------------------------------------------------------TRANSACTION----------------------------------------------------------------//
+
 
 async function viewAllTransactions(){
     try {

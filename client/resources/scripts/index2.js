@@ -5,6 +5,8 @@ let account = null;
 let url = "http://localhost:5156/api/data";
 let url2 = "http://localhost:5156/api/account/";
 let url3 = "http://localhost:5156/api/transaction/";
+let url4 = "http://localhost:5156/api/bidding/";
+
  
 let hasRedirected = localStorage.getItem('hasRedirected') || 'false';
 let newAccount = localStorage.getItem('passBy')
@@ -29,6 +31,9 @@ async function loadData() {
     await getAllData();
     
 }
+
+// -----------------------------------------------------------------ACCOUNTS----------------------------------------------------------------//
+
 
 async function signInHome() {
     const email = document.getElementById('inputEmail').value;
@@ -115,6 +120,10 @@ async function toggleLoginStatus() {
         console.error('Error toggling login status:', error);
     }
 }
+
+
+// -----------------------------------------------------------------DATA----------------------------------------------------------------//
+
 
 async function getAllData() {
     try {
@@ -253,6 +262,7 @@ async function getTabTeam(team, sport) {
 
 
 // -----------------------------------------------------------------TRANSACTIONS----------------------------------------------------------------//
+
 
 function openModal(name, price, inventoryID) {
     const modal = document.getElementById("buyModal");
@@ -400,3 +410,6 @@ async function displayBought() {
         console.error("Element with ID 'app3' not found.");
     }
 }
+
+// -----------------------------------------------------------------BIDDING----------------------------------------------------------------//
+
