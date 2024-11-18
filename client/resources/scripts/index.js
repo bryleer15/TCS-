@@ -51,7 +51,6 @@ async function getAllAccounts() {
     }
   }
 
-
 async function signInHome() {
     const email = document.getElementById('inputEmail').value;
     const password = document.getElementById('inputPassword').value;
@@ -62,10 +61,9 @@ async function signInHome() {
 
     if (account) {
         console.log('Login successful!');
-        account.isLoggedin = "T";  // Set login status locally
+        account.isLoggedin = "T";  
 
         try {
-            // Log URL and data being sent
             const url = url2 + account.accountID;
             console.log(`Fetching URL: ${url}`);
             console.log("Account data being sent:", JSON.stringify(account));
@@ -78,7 +76,6 @@ async function signInHome() {
                 body: JSON.stringify(account)
             });
 
-            // Check response status
             if (response.ok) {
                 localStorage.setItem('passBy', JSON.stringify(account));
                 console.log("Account stored in localStorage:", account);
@@ -108,10 +105,8 @@ async function toggleLoginStatus() {
             return;
         }
 
-        // Toggle login status
         account.isLoggedin = account.isLoggedin === "T" ? "F" : "T";
 
-        // Update the account on the server
         const response = await fetch(url2 + account.accountID, {
             method: "PUT",
             headers: {
@@ -123,7 +118,6 @@ async function toggleLoginStatus() {
         if (response.ok) {
             localStorage.setItem('passBy', JSON.stringify(account));
 
-            // Redirect based on the new login status and admin status
             if (account.isLoggedin === "T") {
                 if (account.isAdmin === "T") {
                     window.location.href = './admin.html';
@@ -225,8 +219,7 @@ async function getSport(sport) {
         await getAllData();
 
         sportData = data.filter(item => item.sport === sport && item.bought === 'F');
-    
-        // Store and log the filtered sport data
+
         localStorage.setItem('sportData', JSON.stringify(sportData));
         console.log(sportData);
         displayTeamsOnNewPage(sportData);
@@ -240,7 +233,6 @@ async function getCategory(category) {
 
     sportData = data.filter(item => item.category === category && item.bought === 'F');
 
-    // Store and log the filtered sport data
     localStorage.setItem('sportData', JSON.stringify(sportData)); 
     console.log(sportData);
 }
@@ -267,7 +259,7 @@ function loadCardData() {
   const cardData = JSON.parse(localStorage.getItem('cardData'));
 
   if (cardData) {
-      console.log("Loaded card data:", cardData); // Debugging line
+      console.log("Loaded card data:", cardData); 
       buildTable2(cardData);
   } else {
       console.error("No card data found in localStorage");
@@ -327,7 +319,7 @@ function displaySportsOnNewPage() {
 }
 
 function handleSportClick(sport) {
-    console.log(`Sport clicked: ${sport}`);  // Debug log
+    console.log(`Sport clicked: ${sport}`);  
     getTabSport(sport).then(() => {
        displaySport('sportData');  
     //    displayTeamsOnNewPage(sport)
@@ -360,7 +352,6 @@ function openModal(name, price) {
         <button type="submit" class="btn-primary">Confirm Purchase</button>
     </form><br>`;
 
-    // Insert the HTML into the designated container in the modal
     document.getElementById("buynow").innerHTML = html;
 }
 
@@ -382,23 +373,19 @@ async function viewTransaction(){
 }
 
 async function displayBought() {
-    // Hide unnecessary sections
     document.getElementById("app").style.display = "none";
     document.getElementById("data").style.display = "none";
     document.getElementById("app2").style.display = "none";
     document.getElementById("row").style.display = "none";
 
 
-    // Call viewTransaction() to populate myTransaction and data
     await viewTransaction();
 
-    // Filter data for bought items and matching inventoryID
     const filteredData = data.filter(item => 
         item.bought === 'T' && 
         myTransaction.some(transaction => transaction.inventoryID === item.inventoryID)
     );
 
-    // Start with the first table (transactions)
     let html = `<table class="table">
     <tr>
       <th>Transaction ID</th>
@@ -418,10 +405,8 @@ async function displayBought() {
         </tr>`;
     });
 
-    // Close the first table
     html += `</table><br/>`;
 
-    // Add the second table (filtered data)
     html += `<table class="table">
     <tr>
       <th>First Name</th>
@@ -441,10 +426,8 @@ async function displayBought() {
         </tr>`;
     });
 
-    // Close the second table
     html += `</table>`;
 
-    // Display the HTML in the app3 div
     document.getElementById("app3").innerHTML = html;
 }
 
@@ -455,7 +438,7 @@ async function handleAddTransaction(inventoryID, price) {
         console.log("Transaction Date:", dateOnly);
 
         let trans = {
-            accountID: account.accountID,  // Ensure `account.accountID` is defined and available
+            accountID: account.accountID,
             inventoryID: inventoryID,
             price: price,
             transDate: dateOnly
@@ -472,9 +455,8 @@ async function handleAddTransaction(inventoryID, price) {
 
         if (response.ok) {
             console.log("Transaction successful");
-            closeModal();  // Close modal upon successful transaction
-            // Optionally reload or update page here
-            // handleOnLoad();
+            closeModal();  
+            handleOnLoad();
         } else {
             console.error("Transaction failed", response.statusText);
             alert("Failed to complete transaction. Please try again.");
@@ -503,16 +485,13 @@ async function displayBought() {
     document.getElementById("data").style.display = "none";
 
 
-    // Call viewTransaction() to populate myTransaction and data
     await viewTransaction();
 
-    // Filter data for bought items and matching inventoryID
     const filteredData = data.filter(item => 
         item.bought === 'T' && 
         myTransaction.some(transaction => transaction.inventoryID === item.inventoryID)
     );
 
-    // Start with the first table (transactions)
     let html = `<table class="table">
     <tr>
       <th>Transaction ID</th>
@@ -532,10 +511,8 @@ async function displayBought() {
         </tr>`;
     });
 
-    // Close the first table
     html += `</table><br/>`;
 
-    // Add the second table (filtered data)
     html += `<table class="table">
     <tr>
       <th>First Name</th>
@@ -555,7 +532,6 @@ async function displayBought() {
         </tr>`;
     });
 
-    // Close the second table
     html += `</table>`;
 
     let app3Element = document.getElementById("app3");
