@@ -2,9 +2,11 @@ let data = [];
 let sportData = [];
 let myAccount = [];
 let account = null;
+
 let url = "http://localhost:5156/api/data";
 let url2 = "http://localhost:5156/api/account/";
 let url3 = "http://localhost:5156/api/transaction/";
+let url4 = "http://localhost:5156/api/bid";
  
 let hasRedirected = localStorage.getItem('hasRedirected') || 'false';
 let newAccount = localStorage.getItem('passBy')
@@ -19,8 +21,9 @@ async function handleOnLoad() {
     });
 
     await getAllAccounts();
-
     console.log("Loaded data:", data); 
+
+    findBiddable()
 
     localStorage.setItem('hasRedirected', 'false');
 
@@ -459,12 +462,11 @@ async function handleAddTransaction(inventoryID, price) {
             handleOnLoad();
         } else {
             console.error("Transaction failed", response.statusText);
-            alert("Failed to complete transaction. Please try again.");
+           
         }
     } catch (error) {
         console.error("Error occurred:", error);
-        alert("An error occurred while processing the transaction.");
-    }
+        }
 }
 
 async function viewTransaction(){
@@ -541,3 +543,63 @@ async function displayBought() {
         console.error("Element with ID 'app3' not found.");
     }
 }
+
+// -----------------------------------------------------------------BIDDING----------------------------------------------------------------//
+
+async function findBiddable() {
+    let bidData = [];
+
+    // Step 1: Fetch biddable items from API or preloaded `data`
+    try {
+        if (data && data.length > 0) {
+            bidData = data.filter(item => item.isBiddable === 'T' && item.bought === 'F');
+        
+        }
+    } catch (error) {
+        console.error("Error fetching biddable items:", error);
+        return;
+    }
+
+    console.log("Biddable Items:", bidData);
+
+    // Step 2: Iterate through the filtered items and process bids
+    for (const item of bidData) {
+        // Prepare bidding object
+        const bidding = {
+            InventoryID: item.InventoryID || item.inventoryID, // Use correct property
+            AccountID: null, // If AccountID is required, provide a value
+            BidDate: new Date().toISOString().split('T')[0], // Format: YYYY-MM-DD
+            HighestBid: 0.00,
+            RemainingTime: 600, // Example: 10 minutes
+            Price: item.Price || item.price, // Use correct property
+        };
+
+        console.log("Bidding Object Prepared:", bidding);
+
+        // Step 3: Send POST request to create a bid
+        try {
+            const response = await fetch("http://localhost:5156/api/bid", {
+                method: "POST",
+                body: JSON.stringify(bidding),
+                headers: {
+                    "Content-Type": "application/json; charset=UTF-8"
+                }
+            });
+
+            if (response.ok) {
+                console.log("Transaction successful for InventoryID:", bidding.InventoryID);
+            } else {
+                const errorDetails = await response.json();
+                console.error(
+                    `Transaction failed for InventoryID: ${bidding.InventoryID}`,
+                    errorDetails
+                );
+            }
+        } catch (error) {
+            console.error("Error processing InventoryID:", bidding.InventoryID, error);
+        }
+    }
+}
+
+
+

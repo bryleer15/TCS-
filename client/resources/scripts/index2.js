@@ -20,6 +20,7 @@ async function handleOnLoad() {
         displaySportsOnNewPage();
     });
 
+
     account = JSON.parse(localStorage.getItem('passBy'));
     console.log("Account retrieved:", account);  
     
@@ -412,4 +413,3 @@ async function displayBought() {
 }
 
 // -----------------------------------------------------------------BIDDING----------------------------------------------------------------//
-
