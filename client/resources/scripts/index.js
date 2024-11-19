@@ -549,7 +549,6 @@ async function displayBought() {
 async function findBiddable() {
     let bidData = [];
 
-    // Step 1: Fetch biddable items from API or preloaded `data`
     try {
         if (data && data.length > 0) {
             bidData = data.filter(item => item.isBiddable === 'T' && item.bought === 'F');
@@ -562,21 +561,18 @@ async function findBiddable() {
 
     console.log("Biddable Items:", bidData);
 
-    // Step 2: Iterate through the filtered items and process bids
     for (const item of bidData) {
-        // Prepare bidding object
         const bidding = {
-            InventoryID: item.InventoryID || item.inventoryID, // Use correct property
-            AccountID: null, // If AccountID is required, provide a value
-            BidDate: new Date().toISOString().split('T')[0], // Format: YYYY-MM-DD
+            InventoryID: item.InventoryID || item.inventoryID, 
+            AccountID: null, 
+            BidDate: new Date().toISOString().split('T')[0], 
             HighestBid: 0.00,
-            RemainingTime: 600, // Example: 10 minutes
-            Price: item.Price || item.price, // Use correct property
+            RemainingTime: 600, 
+            Price: item.Price || item.price,
         };
 
         console.log("Bidding Object Prepared:", bidding);
 
-        // Step 3: Send POST request to create a bid
         try {
             const response = await fetch("http://localhost:5156/api/bid", {
                 method: "POST",
