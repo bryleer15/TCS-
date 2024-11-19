@@ -376,22 +376,33 @@ private async Task BidNoReturnSql(string sql, List<MySqlParameter> parms) {
 
 public async Task InsertBid(Bid myBid) {
     string sql = @$"INSERT INTO BIDDING
-                    (bidID, inventoryID, accountID, bidDate, highestBid, price, remainTime)
-                    VALUES (@bidID, @inventoryID, @accountID, @bidDate, @highestBid, @price, @remainTime);";
+                    (bidID, inventoryID, bidDate, highestBid, price, remainTime)
+                    VALUES (@bidID, @inventoryID, @bidDate, @highestBid, @price, @remainTime);";
 
     List<MySqlParameter> parms = new() {
          new MySqlParameter("@bidID", MySqlDbType.Int32) { Value = myBid.BidID },
         new MySqlParameter("@inventoryID", MySqlDbType.Int32) { Value = myBid.InventoryID },
-        new MySqlParameter("@accountID", MySqlDbType.Int32) { Value = myBid.AccountID }, // Handle nullable AccountID
         new MySqlParameter("@bidDate", MySqlDbType.Date) { Value = myBid.BidDate },
         new MySqlParameter("@highestBid", MySqlDbType.Decimal) { Value = myBid.HighestBid }, // Assuming decimal type
         new MySqlParameter("@price", MySqlDbType.Decimal) { Value = myBid.Price }, // Assuming decimal type
-        new MySqlParameter("@remainTime", MySqlDbType.Int32) { Value = myBid.RemainTime }
+        new MySqlParameter("@remainTime", MySqlDbType.Int32) { Value = 600 }
     };
 
     await BidNoReturnSql(sql, parms);
 }
 
+   public async Task UpdateBid(Bid myBid, int inventoryID){
+System.Console.WriteLine(inventoryID);
+    string sql = @$"UPDATE BIDDING
+        SET highestBid = @highestBid WHERE inventoryID = @inventoryID;";
+ 
+        List<MySqlParameter> parms = new(){
+        new MySqlParameter("@inventoryID", MySqlDbType.Int32) { Value = inventoryID },
+        new MySqlParameter("@highestBid", MySqlDbType.Double) { Value = myBid.HighestBid }, // Assuming decimal type
+    };
+ 
+    await BidNoReturnSql(sql, parms);
+}
 
 
 }

@@ -13,13 +13,15 @@ namespace api.Controllers
     public class BidController : ControllerBase
     {
 
-    //       [HttpGet]
-    // public async Task<List<Data>> Get(){
-    //     Database myDatabase = new();
-    //     return await myDatabase.GetAllData();
-    // }
 
-         
+          [HttpPut("{inventoryID}")]
+    public async Task Put(int inventoryID, [FromBody] Bid value){
+        System.Console.WriteLine("made to put");
+        Database myDatabase = new();
+        await myDatabase.UpdateBid(value, inventoryID);
+    }
+
+
 
     [HttpPost]
         public async Task Post([FromBody] Bid value)
@@ -28,8 +30,6 @@ namespace api.Controllers
             Database myDatabase = new();
             await myDatabase.InsertBid(value);
         }
-
-
 
 
     }
