@@ -9,6 +9,7 @@ namespace api.Models
     {
         public int BidID{ get; set; }
         public int InventoryID{ get; set; }
+        public int AccountID{ get; set; }
         public double HighestBid{ get; set; }
         public DateTime BidDate {get; set;}
         public int RemainTime { get; set; }
