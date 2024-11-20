@@ -563,32 +563,34 @@ async function findBiddable() {
 
     for (const item of bidData) {
         const bidding = {
-            InventoryID: item.InventoryID || item.inventoryID, 
-            AccountID: null, 
+            InventoryID: item.inventoryID, 
+            AccountID: accountID,
             BidDate: new Date().toISOString().split('T')[0], 
             HighestBid: 0.00,
             RemainingTime: 600, 
-            Price: item.Price || item.price,
+            Price: item.price,
         };
 
         console.log("Bidding Object Prepared:", bidding);
 
         try {
-            const response = await fetch("http://localhost:5156/api/bid", {
+            const response = await fetch(url4, {
                 method: "POST",
-                body: JSON.stringify(bidding),
                 headers: {
                     "Content-Type": "application/json; charset=UTF-8"
-                }
+                },
+                body: JSON.stringify(bidding),
             });
-
+        
+            console.log("Fetch Response:", response);
+        
             if (response.ok) {
                 console.log("Transaction successful for InventoryID:", bidding.InventoryID);
             } else {
-                const errorDetails = await response.json();
+                const errorDetails = await response.text(); // Use .text() for non-JSON errors
                 console.error(
                     `Transaction failed for InventoryID: ${bidding.InventoryID}`,
-                    errorDetails
+                    { status: response.status, statusText: response.statusText, errorDetails }
                 );
             }
         } catch (error) {
@@ -597,5 +599,149 @@ async function findBiddable() {
     }
 }
 
+async function displayBiddable() {
+    let bidData = [];
 
+    try {
+        if (data && data.length > 0) {
+            bidData = data.filter(item => item.isBiddable === 'T' && item.bought === 'F');
+        }
+    } catch (error) {
+        console.error("Error fetching biddable items:", error);
+        return;
+    }
 
+    console.log("Biddable Items:", bidData);
+
+    let html = '<div class="card-container d-flex flex-wrap justify-content-center">';
+
+    bidData.forEach(function (item, index) {
+        const timerId = `timer-${index}`;
+        html += `
+            <div class="flip-card m-4" style="width: 18rem;">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img class="card-img-top" src="${item.picture}" alt="${item.firstName} ${item.lastName}" style="width:100%; height: 385px;">
+                        <h5>${item.firstName} ${item.lastName}</h5>
+                    </div>
+                    <div class="flip-card-back">
+                        <h5>${item.firstName} ${item.lastName}</h5>
+                        <p>Team: ${item.team}</p>
+                        <p>Sport: ${item.sport}</p>
+                        <p>PSA Rating: ${item.rating}</p>
+                        <p>Price: $${item.price}</p>
+                        <p>${item.descriptions}</p>
+                        <p><strong>Time Remaining: <span id="${timerId}">10:00</span></strong></p>
+                        <button class="btn-primary" onclick="placeBid(${item.inventoryID}, ${item.price})">Bid Now</button>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+
+    html += "</div>";
+
+    // Render the cards into a container in the DOM
+    document.getElementById("biddableCardsContainer").innerHTML = html;
+
+    // Start countdown timers after the cards are rendered
+    bidData.forEach(function (item, index) {
+        const timerId = `timer-${index}`;
+        startCountdown(timerId, 30, item.inventoryID); 
+    });
+}
+
+function startCountdown(timerId, duration, inventoryID) {
+    const timerElement = document.getElementById(timerId);
+
+    if (!timerElement) {
+        console.error(`Timer element with ID "${timerId}" not found.`);
+        return;
+    }
+
+    let remainingTime = duration;
+
+    const intervalId = setInterval(async () => {
+        if (remainingTime <= 0) {
+            clearInterval(intervalId);
+
+            // Check if the item is still not bought
+            const isStillAvailable = await checkItemAvailability(inventoryID);
+
+            if (isStillAvailable) {
+                // If no bid was placed, set isBiddable to F
+                await updateItemStatus(inventoryID, { isBiddable: 'F' });
+                timerElement.textContent = "Bid Ended";
+            } else {
+                timerElement.textContent = "Sold!";
+            }
+
+            return;
+        }
+
+        const minutes = Math.floor(remainingTime / 60);
+        const seconds = remainingTime % 60;
+        timerElement.textContent = `${minutes.toString().padStart(2, "0")}:${seconds
+            .toString()
+            .padStart(2, "0")}`;
+
+        remainingTime -= 1;
+    }, 1000); // Run every second
+}
+
+async function checkItemAvailability(inventoryID) {
+    try {
+        const response = await fetch(`http://localhost:5156/api/inventory/${inventoryID}`);
+        if (!response.ok) {
+            throw new Error(`Failed to check item status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data.bought === 'F'; // Return true if the item is still available
+    } catch (error) {
+        console.error(`Error checking item availability for ID ${inventoryID}:`, error);
+        return false; // Assume item is no longer available on error
+    }
+}
+
+async function updateItemStatus(inventoryID, updateData) {
+    try {
+        const response = await fetch(`http://localhost:5156/api/data/${inventoryID}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updateData)
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to update item status: ${response.status}`);
+        }
+
+        console.log(`Item ${inventoryID} status updated successfully.`);
+    } catch (error) {
+        console.error(`Error updating item status for ID ${inventoryID}:`, error);
+    }
+}
+
+function placeBid(inventoryID, price) {
+        const modal = document.getElementById("buyModal");
+        modal.style.display = "block";
+        document.getElementById("modalTitle").innerText = `Place Bid`;
+        document.getElementById("modalPrice").innerText = `Starting Bid: $${price}`;
+        
+        let html = `<form id="purchaseForm">
+    
+            <label for="highestBid">Bid Amount</label>
+            <input type="text" id="highestBid" name="highestBid" required>
+    
+            <button onclick="handleAddTransaction(${inventoryID}, ${price})" class="btn-primary">Confirm Bid</button>
+        </form><br>`;
+    
+        document.getElementById("buynow").innerHTML = html;
+}
+
+function closeModal() {
+        const modal = document.getElementById("buyModal");
+        modal.style.display = "none";
+}
